@@ -1,0 +1,112 @@
+<section class="page-hero resume-hero">
+  <div class="container">
+    <h1>My <span class="accent">Resume</span></h1>
+    <p class="hero-sub">A complete overview of my skills and experience</p>
+    <a href="Resume_Parungao,ClarenceLane.pdf" download class="btn btn-primary resume-dl-btn">
+      Download PDF Resume
+    </a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container resume-layout">
+
+    <aside class="resume-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-avatar">
+          <img src="profile2.png" alt="Clarence Lane Parungao" class="sidebar-photo">
+        </div>
+        <h3>Clarence Lane C. Parungao</h3>
+        <p class="sidebar-role">Web Developer & UI/UX Designer</p>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Contact</h4>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=clc.parungao@gmail.com" target="_blank" rel="noopener" class="sidebar-link">clc.parungao&#64;gmail.com</a>
+        <p>0946 - 310 - 4608</p>
+        <p>Pampanga, Philippines</p>
+        <a href="https://linkedin.com/in/clarence-lane-parungao-84485533a/" target="_blank" rel="noopener" class="sidebar-link">LinkedIn</a>
+        <a href="https://github.com/Laneycakes" target="_blank" rel="noopener" class="sidebar-link">&#64;Laneycakes</a>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Skills</h4>
+        <div class="sidebar-skills">
+          @for (s of allSkills; track s) {
+            <span class="tag">{{ s }}</span>
+          }
+        </div>
+      </div>
+    </aside>
+
+    <div class="resume-main">
+
+      <div class="resume-block">
+        <h2 class="block-title">Professional Summary</h2>
+        <p>Motivated Web Developer with hands-on experience in designing and developing user-friendly web applications. Proficient in front-end technologies, UI/UX design, and collaborative project development. Seeking an opportunity to utilize technical and creative abilities in a professional setting, while also learning and contributing to innovative technological developments.</p>
+      </div>
+
+      <div class="resume-block">
+        <h2 class="block-title">Education</h2>
+        <div class="resume-entry">
+          <div class="entry-header">
+            <div>
+              <h3>Holy Angel University</h3>
+              <p class="entry-sub">BS Information Technology – Web Development</p>
+            </div>
+            <span class="tag">2023 – 2027</span>
+          </div>
+          <p>Pampanga, Philippines</p>
+        </div>
+      </div>
+
+      <div class="resume-block">
+        <h2 class="block-title">Projects</h2>
+        @for (p of resumeProjects; track p.title) {
+          <div class="resume-entry">
+            <div class="entry-header">
+              <h3>{{ p.title }}</h3>
+              <span class="tag" [class.tag-green]="p.status !== 'In Progress'">{{ p.status }}</span>
+            </div>
+            <ul class="entry-list">
+              @for (pt of p.points; track pt) {
+                <li>{{ pt }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+      <div class="resume-block">
+        <h2 class="block-title">Experience & Leadership</h2>
+        @for (exp of resumeExperience; track exp.role) {
+          <div class="resume-entry">
+            <div class="entry-header">
+              <div>
+                <h3>{{ exp.org }}</h3>
+                <p class="entry-sub">{{ exp.role }}</p>
+              </div>
+              <span class="tag">{{ exp.period }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="resume-block">
+        <h2 class="block-title">Certifications</h2>
+        <div class="cert-resume-grid">
+          @for (cert of allCerts; track cert.name) {
+            <div class="cert-resume-item">
+              <span class="cert-dot" aria-hidden="true">●</span>
+              <div>
+                <p class="cert-name">{{ cert.name }}</p>
+                <p class="cert-issuer">{{ cert.issuer }} · {{ cert.year }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

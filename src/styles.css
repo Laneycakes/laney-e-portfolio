@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --pink: #ff96ad;
+  --pink-light: #ffd6df;
+  --pink-dark: #e07090;
+  --green: #2b7525;
+  --green-light: #4a9e42;
+  --green-muted: rgba(167, 105, 152, 0.16);
+  --white: #ffffff;
+  --off-white: #fdf8f9;
+  --text-dark: #2c2c2c;
+  --text-muted: #6b6b6b;
+  --border: #f0dde3;
+  --shadow: 0 4px 24px rgba(255, 150, 173, 0.15);
+  --shadow-lg: 0 12px 48px rgba(255, 150, 173, 0.25);
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 16px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-body); background-color: var(--off-white); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; }
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; color: var(--text-dark); }
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); }
+h3 { font-size: 1.4rem; }
+p { color: var(--text-muted); }
+a { color: var(--green); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--pink-dark); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 80px 0; }
+.section-title { text-align: center; margin-bottom: 12px; }
+.section-title-underline { display: block; width: 60px; height: 4px; background: linear-gradient(90deg, var(--pink), var(--green)); margin: 12px auto 0; border-radius: 2px; }
+.section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 56px; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; text-decoration: none; }
+.btn-primary { background: linear-gradient(135deg, var(--pink), var(--pink-dark)); color: white; box-shadow: 0 4px 16px rgba(255, 150, 173, 0.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 150, 173, 0.5); color: white; }
+.btn-secondary { background: transparent; color: var(--green); border: 2px solid var(--green); }
+.btn-secondary:hover { background: var(--green); color: white; transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--pink-dark); border: 2px solid var(--pink); }
+.btn-outline:hover { background: var(--pink); color: white; transform: translateY(-2px); }
+
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; transition: var(--transition); }
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+.tag { display: inline-block; padding: 4px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; background: var(--pink-light); color: var(--pink-dark); }
+.tag-green { background: rgba(43, 117, 37, 0.1); color: var(--green); }
+
+/* ── UNIFIED PAGE HERO (all pages match About's style) ── */
+.page-hero {
+  padding: 120px 0 70px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--pink-light) 0%, var(--off-white) 60%);
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,150,173,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,117,37,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.page-hero .container { position: relative; z-index: 1; }
+.page-hero h1 { margin-bottom: 12px; }
+.page-hero .accent { color: var(--pink); }
+.page-hero .accent-green { color: var(--green); }
+.page-hero .hero-sub { color: var(--text-muted); margin-top: 12px; font-size: 1.1rem; max-width: 540px; }
+
+.projects-hero,
+.resume-hero,
+.contact-hero {
+  background: linear-gradient(135deg, var(--pink-light), var(--off-white)) !important;
+}
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+
+.skip-link { position: absolute; top: -100%; left: 0; padding: 12px 24px; background: var(--green); color: white; font-weight: 600; z-index: 9999; border-radius: 0 0 8px 0; }
+.skip-link:focus { top: 0; }
+
+@media (max-width: 768px) { .section { padding: 60px 0; } }

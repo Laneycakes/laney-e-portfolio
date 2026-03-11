@@ -1,0 +1,136 @@
+<!-- HERO -->
+<section class="hero" aria-label="Hero introduction">
+  <div class="hero-bg-decor" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-text fade-in-up">
+      <p class="hero-greeting">Hello, I'm</p>
+      <h1 class="hero-name">Clarence Lane<br><span class="accent">Parungao</span></h1>
+      <p class="hero-role">Web Developer <span class="dot">|</span> UI/UX Designer</p>
+      <p class="hero-bio">Motivated web developer with hands-on experience in designing and developing user-friendly web applications. Proficient in front-end technologies and creative UI design.</p>
+      <div class="hero-cta">
+        <a routerLink="/projects" class="btn btn-primary">View My Work</a>
+        <a routerLink="/contact" class="btn btn-secondary">Let's Connect</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="avatar-container">
+        <div class="avatar-ring"></div>
+        <div class="avatar-blob-bg"></div>
+        <img src="profile.png" alt="Clarence Lane Parungao" class="avatar-photo">
+        <div class="floating-tag tag-html">HTML</div>
+        <div class="floating-tag tag-css">CSS</div>
+        <div class="floating-tag tag-js">JavaScript</div>
+        <div class="floating-tag tag-figma">Figma</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div></div>
+</section>
+
+<!-- SKILLS + FEATURED PROJECTS -->
+<section class="section skills-and-projects" aria-label="Skills and featured projects">
+  <div class="container sap-grid">
+
+    <div class="sap-left">
+      <h2 class="sap-title">Skills</h2>
+      <span class="section-title-underline sap-underline"></span>
+      <div class="skills-columns">
+        <div class="skills-col skills-col-a">
+          @for (skill of colA; track skill.name + 'a1') {
+            <div class="skill-item">
+              <i [class]="skill.icon + ' skill-icon'" aria-hidden="true"></i>
+              <span>{{ skill.name }}</span>
+            </div>
+          }
+          @for (skill of colA; track skill.name + 'a2') {
+            <div class="skill-item" aria-hidden="true">
+              <i [class]="skill.icon + ' skill-icon'"></i>
+              <span>{{ skill.name }}</span>
+            </div>
+          }
+        </div>
+        <div class="skills-col skills-col-b">
+          @for (skill of colB; track skill.name + 'b1') {
+            <div class="skill-item">
+              <i [class]="skill.icon + ' skill-icon'" aria-hidden="true"></i>
+              <span>{{ skill.name }}</span>
+            </div>
+          }
+          @for (skill of colB; track skill.name + 'b2') {
+            <div class="skill-item" aria-hidden="true">
+              <i [class]="skill.icon + ' skill-icon'"></i>
+              <span>{{ skill.name }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="sap-right">
+      <h2 class="sap-title">Featured Projects</h2>
+      <span class="section-title-underline sap-underline"></span>
+
+      <div class="projects-carousel-outer">
+        <button class="carousel-btn" (click)="prevProject()" aria-label="Previous project">&#8592;</button>
+        <div class="projects-carousel-track" #carouselTrack
+          (mousedown)="dragStart($event)"
+          (mouseup)="dragEnd($event)"
+          (mouseleave)="cancelDrag()">
+          <div class="projects-carousel-inner"
+            [class.ready]="carouselReady"
+            [style.transform]="'translateX(' + carouselOffset + 'px)'">
+            @for (project of featuredProjects; track project.title; let i = $index) {
+              <article class="project-slide" [class.active]="i === activeSlide" (click)="setSlide(i)">
+                <div class="project-image-wrap">
+                  <img [src]="project.image" [alt]="project.title" class="project-img">
+                  <span class="project-status" [class.in-progress]="project.status === 'In Progress'">{{ project.status }}</span>
+                </div>
+                <div class="project-body">
+                  <h3>{{ project.title }}</h3>
+                  <p>{{ project.description }}</p>
+                  <div class="project-tags">
+                    @for (tool of project.tools; track tool) {
+                      <span class="tag">{{ tool }}</span>
+                    }
+                  </div>
+                  <a routerLink="/projects" class="btn btn-outline project-btn">View Details →</a>
+                </div>
+              </article>
+            }
+          </div>
+        </div>
+        <button class="carousel-btn" (click)="nextProject()" aria-label="Next project">&#8594;</button>
+      </div>
+
+      <div class="carousel-dots">
+        @for (project of featuredProjects; track project.title; let i = $index) {
+          <button class="carousel-dot" [class.active]="i === activeSlide" (click)="setSlide(i)" [attr.aria-label]="'Go to slide ' + (i+1)"></button>
+        }
+      </div>
+
+      <div class="see-all">
+        <a routerLink="/projects" class="btn btn-secondary">See All Projects</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" aria-label="Call to action">
+  <div class="container cta-inner">
+    <div>
+      <h2>Let's Work Together</h2>
+      <p>Have a project in mind? I'd love to hear about it.</p>
+    </div>
+    <a routerLink="/contact" class="btn btn-primary">Get In Touch</a>
+  </div>
+  <div class="cta-wave-bottom" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,0 Q180,90 360,45 Q540,0 720,50 Q900,95 1080,40 Q1260,-15 1440,50 L1440,90 L0,90 Z" fill="#2c2c2c"/>
+    </svg>
+  </div>
+</section>

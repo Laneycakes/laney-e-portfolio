@@ -1,0 +1,113 @@
+<section class="page-hero projects-hero">
+  <div class="container">
+    <h1>My <span class="accent">Projects</span></h1>
+    <p class="hero-sub">Things I've designed, built, and shipped</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar" role="group" aria-label="Filter projects">
+      @for (filter of filters; track filter) {
+        <button class="filter-btn" [class.active]="activeFilter === filter" (click)="setFilter(filter)">{{ filter }}</button>
+      }
+    </div>
+  </div>
+
+  <div class="proj-carousel-outer">
+    <button class="carousel-btn" (click)="prevSlide()" aria-label="Previous">&#8592;</button>
+    <div class="proj-carousel-track"
+      (mousedown)="dragStart($event)"
+      (mouseup)="dragEnd($event)"
+      (mouseleave)="cancelDrag()">
+      <div class="proj-carousel-inner"
+        [class.ready]="carouselReady"
+        [style.transform]="'translateX(' + offset + 'px)'">
+        @for (p of displayProjects; track p.title + $index; let i = $index) {
+          <article class="proj-card" [class.center]="i === activeIndex">
+            <div class="proj-banner">
+              <img [src]="p.image" [alt]="p.title" class="proj-img">
+              <span class="proj-badge" [class.in-progress]="p.status === 'In Progress'">
+                {{ p.status === 'In Progress' ? 'In Progress' : 'Completed ' + p.status }}
+              </span>
+            </div>
+            <div class="proj-body">
+              <div class="proj-header">
+                <h3>{{ p.title }}</h3>
+                <span class="tag">{{ p.category }}</span>
+              </div>
+              <p class="proj-desc">{{ p.description }}</p>
+              <div class="proj-tools">
+                @for (tool of p.tools; track tool) {
+                  <span class="tag tag-green">{{ tool }}</span>
+                }
+              </div>
+              <div class="proj-links">
+                @if (p.liveUrl) {
+                  <a [href]="p.liveUrl" target="_blank" rel="noopener" class="btn btn-primary small-btn">Live Demo</a>
+                }
+                @if (p.codeUrl) {
+                  <a [href]="p.codeUrl" target="_blank" rel="noopener" class="btn btn-secondary small-btn">View Code</a>
+                }
+                @if (!p.liveUrl && !p.codeUrl) {
+                  <span class="no-link">{{ p.status === 'In Progress' ? 'In Progress' : 'Completed' }}</span>
+                }
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+    <button class="carousel-btn" (click)="nextSlide()" aria-label="Next">&#8594;</button>
+  </div>
+
+  <div class="carousel-dots">
+    @for (p of filteredProjects; track p.title; let i = $index) {
+      <button class="carousel-dot" [class.active]="i === dotIndex" (click)="goTo(i)"></button>
+    }
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section certs-section" aria-label="Certifications">
+  <div class="container">
+    <h2 class="section-title">Certifications</h2>
+    <span class="section-title-underline"></span>
+    <p class="section-subtitle">Continuous learning and growth</p>
+  </div>
+
+  <div class="certs-scroll-wrap">
+    <div class="certs-scroll-track">
+      @for (cert of certDisplayList; track cert._key) {
+        <div class="cert-card"
+          (click)="openCert(cert)"
+          tabindex="0"
+          (keydown.enter)="openCert(cert)"
+          role="button"
+          [attr.aria-label]="'View ' + cert.name">
+          <div class="cert-img-wrap">
+            <img [src]="cert.image" [alt]="cert.name" loading="lazy">
+          </div>
+          <div class="cert-info">
+            <h4>{{ cert.name }}</h4>
+            <p>{{ cert.issuer }} · {{ cert.year }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+@if (lightboxCert) {
+  <div class="lightbox-overlay" (click)="closeCert()" role="dialog" aria-modal="true">
+    <div class="lightbox-box" (click)="$event.stopPropagation()">
+      <button class="lightbox-close" (click)="closeCert()" aria-label="Close">&#10005;</button>
+      <img [src]="lightboxCert.image" [alt]="lightboxCert.name" class="lightbox-img">
+      <div class="lightbox-meta">
+        <h3>{{ lightboxCert.name }}</h3>
+        <p>{{ lightboxCert.issuer }} · {{ lightboxCert.year }}</p>
+      </div>
+    </div>
+  </div>
+}
