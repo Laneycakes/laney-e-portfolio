@@ -52,7 +52,7 @@
         <div class="photo-blob-bg"></div>
         <div class="photo-ring photo-ring-1"></div>
         <div class="photo-ring photo-ring-2"></div>
-        <img src="profile2.png" alt="Clarence Lane Parungao" class="about-photo">
+        <img [src]="currentPhoto" alt="Clarence Lane Parungao" class="about-photo" [class.photo-fading]="photoFading">        
         <div class="photo-badge badge-1">Web Developer</div>
         <div class="photo-badge badge-2">UI/UX Designer</div>
         <div class="photo-dot dot-a"></div>
@@ -88,7 +88,6 @@
     <div class="soft-skills-row">
       @for (s of softSkills; track s.name) {
         <div class="soft-skill-badge">
-          <span class="soft-skill-icon">{{ s.icon }}</span>
           <span>{{ s.name }}</span>
         </div>
       }
@@ -135,7 +134,7 @@
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2b7525" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
       </div>
       <div>
-        <h3>Holy Angel University</h3>
+        <h3><a href="https://www.hau.edu.ph/" target="_blank" rel="noopener" class="edu-link">Holy Angel University</a></h3>
         <p class="edu-degree">Bachelor of Science in Information Technology</p>
         <p class="edu-spec">Area of Specialization: Web Development</p>
         <p class="edu-period">2023 – 2027 · Pampanga, Philippines</p>

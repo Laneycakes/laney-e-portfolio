@@ -322,3 +322,24 @@
 .devicon-angular-plain.colored {
   color: #dd0031 !important;
 }
+
+/* ── PHOTO CROSSFADE ── */
+.about-photo {
+  transition: opacity 0.4s ease;
+}
+.about-photo.photo-fading {
+  opacity: 0;
+}
+
+/* ── SOFT SKILL BADGES — green glow icons ── */
+.soft-skill-badge {
+  border-color: rgba(43, 117, 37, 0.2);
+}
+.soft-skill-badge:hover {
+  border-color: var(--green);
+  background: rgba(43, 117, 37, 0.06);
+  box-shadow: 0 0 16px rgba(43, 117, 37, 0.25);
+}
+.soft-skill-icon {
+  filter: drop-shadow(0 0 6px rgba(43, 117, 37, 0.6));
+}

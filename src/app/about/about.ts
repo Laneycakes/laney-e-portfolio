@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -9,10 +9,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './about.html',
   styleUrls: ['./about.css']
 })
-export class About {
+export class About implements OnInit, OnDestroy {
+
+  photos = ['profile.png', 'profile2.png'];
+  currentPhotoIndex = 0;
+  currentPhoto = this.photos[0];
+  photoFading = false;
+  private photoInterval: any;
 
   allSkills = [
-    // Technical
     { icon: 'devicon-html5-plain colored', name: 'HTML 5', category: 'technical' },
     { icon: 'devicon-css3-plain colored', name: 'CSS 3', category: 'technical' },
     { icon: 'devicon-javascript-plain colored', name: 'JavaScript', category: 'technical' },
@@ -21,7 +26,6 @@ export class About {
     { icon: 'devicon-flutter-plain colored', name: 'Flutter', category: 'technical' },
     { icon: 'devicon-bootstrap-plain colored', name: 'Bootstrap', category: 'technical' },
     { icon: 'devicon-tailwindcss-plain colored', name: 'Tailwind CSS', category: 'technical' },
-    // Tools
     { icon: 'devicon-figma-plain colored', name: 'Figma', category: 'tools' },
     { icon: 'devicon-vscode-plain colored', name: 'VS Code', category: 'tools' },
     { icon: 'devicon-github-original colored', name: 'GitHub', category: 'tools' },
@@ -31,11 +35,11 @@ export class About {
   ];
 
   softSkills = [
-    { icon: '💬', name: 'Communication' },
-    { icon: '🤝', name: 'Teamwork' },
-    { icon: '🔄', name: 'Adaptability' },
-    { icon: '📝', name: 'Documentation' },
-    { icon: '📚', name: 'Willingness to Learn' },
+    { name: 'Communication' },
+    { name: 'Teamwork' },
+    { name: 'Adaptability' },
+    { name: 'Documentation' },
+    { name: 'Willingness to Learn' },
   ];
 
   experiences = [
@@ -46,4 +50,19 @@ export class About {
     { org: 'School of Computing Student Council (SOC-CSC)', role: 'Community Extension Staff', period: '2024 – 2025' },
     { org: 'School of Computing Student Council (SOC-CSC)', role: 'Finance Staff', period: '2023 – 2025' },
   ];
+
+  ngOnInit(): void {
+    this.photoInterval = setInterval(() => {
+      this.photoFading = true;
+      setTimeout(() => {
+        this.currentPhotoIndex = (this.currentPhotoIndex + 1) % this.photos.length;
+        this.currentPhoto = this.photos[this.currentPhotoIndex];
+        this.photoFading = false;
+      }, 400);
+    }, 5000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.photoInterval);
+  }
 }

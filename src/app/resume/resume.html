@@ -22,18 +22,38 @@
 
       <div class="sidebar-section">
         <h4>Contact</h4>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=clc.parungao@gmail.com" target="_blank" rel="noopener" class="sidebar-link">clc.parungao&#64;gmail.com</a>
-        <p>0946 - 310 - 4608</p>
-        <p>Pampanga, Philippines</p>
-        <a href="https://linkedin.com/in/clarence-lane-parungao-84485533a/" target="_blank" rel="noopener" class="sidebar-link">LinkedIn</a>
-        <a href="https://github.com/Laneycakes" target="_blank" rel="noopener" class="sidebar-link">&#64;Laneycakes</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=clc.parungao@gmail.com" target="_blank" rel="noopener" class="sidebar-link">
+          <span class="slink-icon">✉</span> clc.parungao&#64;gmail.com
+        </a>
+        <p><span class="slink-icon">📞</span> 0946 - 310 - 4608</p>
+        <a href="https://linkedin.com/in/clarence-lane-parungao-84485533a/" target="_blank" rel="noopener" class="sidebar-link">
+          <span class="slink-icon">in</span> LinkedIn
+        </a>
+        <a href="https://github.com/Laneycakes" target="_blank" rel="noopener" class="sidebar-link">
+          <span class="slink-icon">⌥</span> &#64;Laneycakes
+        </a>
+        <p><span class="slink-icon">📍</span> Pampanga, Philippines</p>
       </div>
 
       <div class="sidebar-section">
-        <h4>Skills</h4>
-        <div class="sidebar-skills">
-          @for (s of allSkills; track s) {
-            <span class="tag">{{ s }}</span>
+        <h4>Technical Skills</h4>
+        <div class="sidebar-skills-grid">
+          @for (s of technicalSkills; track s.name) {
+            <div class="sidebar-skill-chip">
+              <i [class]="s.icon" aria-hidden="true"></i>
+              <span>{{ s.name }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Soft Skills</h4>
+        <div class="soft-skills-list">
+          @for (s of softSkills; track s.name) {
+            <div class="soft-skill-row">
+              <span>{{ s.name }}</span>
+            </div>
           }
         </div>
       </div>
@@ -51,7 +71,7 @@
         <div class="resume-entry">
           <div class="entry-header">
             <div>
-              <h3>Holy Angel University</h3>
+              <h3><a href="https://www.hau.edu.ph/" target="_blank" rel="noopener" class="edu-link">Holy Angel University</a></h3>
               <p class="entry-sub">BS Information Technology – Web Development</p>
             </div>
             <span class="tag">2023 – 2027</span>
@@ -94,14 +114,21 @@
 
       <div class="resume-block">
         <h2 class="block-title">Certifications</h2>
+        <p class="cert-click-hint">Click any certificate to verify ↗</p>
         <div class="cert-resume-grid">
           @for (cert of allCerts; track cert.name) {
-            <div class="cert-resume-item">
+            <div class="cert-resume-item"
+              (click)="openCert(cert)"
+              tabindex="0"
+              (keydown.enter)="openCert(cert)"
+              role="link"
+              [attr.aria-label]="cert.name + ' - open certificate'">
               <span class="cert-dot" aria-hidden="true">●</span>
-              <div>
+              <div class="cert-text">
                 <p class="cert-name">{{ cert.name }}</p>
                 <p class="cert-issuer">{{ cert.issuer }} · {{ cert.year }}</p>
               </div>
+              <span class="cert-link-icon" aria-hidden="true">↗</span>
             </div>
           }
         </div>

@@ -19,7 +19,7 @@
       <div class="avatar-container">
         <div class="avatar-ring"></div>
         <div class="avatar-blob-bg"></div>
-        <img src="profile.png" alt="Clarence Lane Parungao" class="avatar-photo">
+        <img src="profile3.png" alt="Clarence Lane Parungao" class="avatar-photo">
         <div class="floating-tag tag-html">HTML</div>
         <div class="floating-tag tag-css">CSS</div>
         <div class="floating-tag tag-js">JavaScript</div>
@@ -30,38 +30,42 @@
   <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div></div>
 </section>
 
-<!-- SKILLS + FEATURED PROJECTS -->
-<section class="section skills-and-projects" aria-label="Skills and featured projects">
-  <div class="container sap-grid">
+<!-- SKILLS + FEATURED PROJECTS — ONE ROW -->
+<section class="skills-and-featured" aria-label="Skills and featured projects">
+  <div class="container skills-featured-grid">
 
-    <div class="sap-left">
-      <h2 class="sap-title">Skills</h2>
-      <span class="section-title-underline sap-underline"></span>
-      <div class="skills-columns">
-        <div class="skills-col skills-col-a">
-          @for (skill of colA; track skill.name + 'a1') {
-            <div class="skill-item">
-              <i [class]="skill.icon + ' skill-icon'" aria-hidden="true"></i>
+    <!-- LEFT: Skills vertical marquee -->
+    <div class="skills-col-wrap">
+      <h2>Skills</h2>
+      <span class="section-title-underline" style="margin: 0 0 8px 0; display:block;"></span>
+      <p class="skills-subtitle">Technologies I work with</p>
+      <div class="marquee-wrap">
+        <!-- Column 1: scrolls UP -->
+        <div class="marquee-col marquee-col-up">
+          @for (skill of colA; track skill.name + 'u1') {
+            <div class="marquee-item">
+              <i [class]="skill.icon + ' marquee-icon'" aria-hidden="true"></i>
               <span>{{ skill.name }}</span>
             </div>
           }
-          @for (skill of colA; track skill.name + 'a2') {
-            <div class="skill-item" aria-hidden="true">
-              <i [class]="skill.icon + ' skill-icon'"></i>
+          @for (skill of colA; track skill.name + 'u2') {
+            <div class="marquee-item" aria-hidden="true">
+              <i [class]="skill.icon + ' marquee-icon'"></i>
               <span>{{ skill.name }}</span>
             </div>
           }
         </div>
-        <div class="skills-col skills-col-b">
-          @for (skill of colB; track skill.name + 'b1') {
-            <div class="skill-item">
-              <i [class]="skill.icon + ' skill-icon'" aria-hidden="true"></i>
+        <!-- Column 2: scrolls DOWN -->
+        <div class="marquee-col marquee-col-down">
+          @for (skill of colB; track skill.name + 'd1') {
+            <div class="marquee-item">
+              <i [class]="skill.icon + ' marquee-icon'" aria-hidden="true"></i>
               <span>{{ skill.name }}</span>
             </div>
           }
-          @for (skill of colB; track skill.name + 'b2') {
-            <div class="skill-item" aria-hidden="true">
-              <i [class]="skill.icon + ' skill-icon'"></i>
+          @for (skill of colB; track skill.name + 'd2') {
+            <div class="marquee-item" aria-hidden="true">
+              <i [class]="skill.icon + ' marquee-icon'"></i>
               <span>{{ skill.name }}</span>
             </div>
           }
@@ -69,50 +73,47 @@
       </div>
     </div>
 
-    <div class="sap-right">
-      <h2 class="sap-title">Featured Projects</h2>
-      <span class="section-title-underline sap-underline"></span>
+    <!-- RIGHT: Featured Projects flip cards -->
+    <div class="featured-col-wrap">
+      <h2>Featured Projects</h2>
+      <span class="section-title-underline" style="margin: 0 0 8px 0; display:block;"></span>
+      <p class="featured-subtitle">Hover the cards to learn more</p>
 
-      <div class="projects-carousel-outer">
-        <button class="carousel-btn" (click)="prevProject()" aria-label="Previous project">&#8592;</button>
-        <div class="projects-carousel-track" #carouselTrack
-          (mousedown)="dragStart($event)"
-          (mouseup)="dragEnd($event)"
-          (mouseleave)="cancelDrag()">
-          <div class="projects-carousel-inner"
-            [class.ready]="carouselReady"
-            [style.transform]="'translateX(' + carouselOffset + 'px)'">
-            @for (project of featuredProjects; track project.title; let i = $index) {
-              <article class="project-slide" [class.active]="i === activeSlide" (click)="setSlide(i)">
-                <div class="project-image-wrap">
-                  <img [src]="project.image" [alt]="project.title" class="project-img">
-                  <span class="project-status" [class.in-progress]="project.status === 'In Progress'">{{ project.status }}</span>
+      <div class="flip-cards-row">
+        @for (project of featuredProjects; track project.title) {
+          <div class="flip-card" tabindex="0" [attr.aria-label]="project.title">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="flip-img-wrap">
+                  <img [src]="project.image" [alt]="project.title" class="flip-img">
+                  <span class="flip-badge" [class.in-progress]="project.status === 'In Progress'">
+                    {{ project.status === 'In Progress' ? 'In Progress' : project.status }}
+                  </span>
                 </div>
-                <div class="project-body">
+                <div class="flip-front-body">
+                  <h3>{{ project.title }}</h3>
+                  <p class="flip-hint">Hover to see details →</p>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="flip-back-body">
                   <h3>{{ project.title }}</h3>
                   <p>{{ project.description }}</p>
-                  <div class="project-tags">
+                  <div class="flip-tags">
                     @for (tool of project.tools; track tool) {
                       <span class="tag">{{ tool }}</span>
                     }
                   </div>
-                  <a routerLink="/projects" class="btn btn-outline project-btn">View Details →</a>
+                  <a routerLink="/projects" class="btn flip-btn">View Details →</a>
                 </div>
-              </article>
-            }
+              </div>
+            </div>
           </div>
-        </div>
-        <button class="carousel-btn" (click)="nextProject()" aria-label="Next project">&#8594;</button>
-      </div>
-
-      <div class="carousel-dots">
-        @for (project of featuredProjects; track project.title; let i = $index) {
-          <button class="carousel-dot" [class.active]="i === activeSlide" (click)="setSlide(i)" [attr.aria-label]="'Go to slide ' + (i+1)"></button>
         }
       </div>
 
       <div class="see-all">
-        <a routerLink="/projects" class="btn btn-secondary">See All Projects</a>
+        <a routerLink="/projects" class="btn btn-secondary">See All Projects →</a>
       </div>
     </div>
 

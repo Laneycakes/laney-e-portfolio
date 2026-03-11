@@ -16,10 +16,6 @@ export class Contact implements OnInit {
   submitSuccess = false;
   submitError = false;
 
-  // Steps to set up:
-  // 1. Go to https://formspree.io and sign up free
-  // 2. Create a new form
-  // 3. Replace YOUR_FORM_ID below with your actual form ID (e.g. 'xpzvwkqr')
   private FORMSPREE_ID = 'xqedwaao';
 
   constructor(private fb: FormBuilder) {}

@@ -12,24 +12,34 @@
         <button class="filter-btn" [class.active]="activeFilter === filter" (click)="setFilter(filter)">{{ filter }}</button>
       }
     </div>
+    <p class="nav-hint">Use ← → arrow keys or swipe to navigate</p>
   </div>
 
-  <div class="proj-carousel-outer">
-    <button class="carousel-btn" (click)="prevSlide()" aria-label="Previous">&#8592;</button>
-    <div class="proj-carousel-track"
-      (mousedown)="dragStart($event)"
-      (mouseup)="dragEnd($event)"
-      (mouseleave)="cancelDrag()">
+  <div class="carousel-controls">
+    <button class="carousel-arrow" (click)="prevSlide()" aria-label="Previous project">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <div class="proj-carousel-outer">
       <div class="proj-carousel-inner"
         [class.ready]="carouselReady"
         [style.transform]="'translateX(' + offset + 'px)'">
         @for (p of displayProjects; track p.title + $index; let i = $index) {
-          <article class="proj-card" [class.center]="i === activeIndex">
+          <article class="proj-card"
+            [class.center]="i === activeIndex"
+            [class.clickable]="!!p.siteUrl"
+            (click)="openSite(p.siteUrl)">
             <div class="proj-banner">
               <img [src]="p.image" [alt]="p.title" class="proj-img">
               <span class="proj-badge" [class.in-progress]="p.status === 'In Progress'">
                 {{ p.status === 'In Progress' ? 'In Progress' : 'Completed ' + p.status }}
               </span>
+              @if (p.siteUrl) {
+                <div class="proj-visit-overlay">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  <span>Visit Site</span>
+                </div>
+              }
             </div>
             <div class="proj-body">
               <div class="proj-header">
@@ -42,28 +52,20 @@
                   <span class="tag tag-green">{{ tool }}</span>
                 }
               </div>
-              <div class="proj-links">
-                @if (p.liveUrl) {
-                  <a [href]="p.liveUrl" target="_blank" rel="noopener" class="btn btn-primary small-btn">Live Demo</a>
-                }
-                @if (p.codeUrl) {
-                  <a [href]="p.codeUrl" target="_blank" rel="noopener" class="btn btn-secondary small-btn">View Code</a>
-                }
-                @if (!p.liveUrl && !p.codeUrl) {
-                  <span class="no-link">{{ p.status === 'In Progress' ? 'In Progress' : 'Completed' }}</span>
-                }
-              </div>
             </div>
           </article>
         }
       </div>
     </div>
-    <button class="carousel-btn" (click)="nextSlide()" aria-label="Next">&#8594;</button>
+
+    <button class="carousel-arrow" (click)="nextSlide()" aria-label="Next project">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
   </div>
 
   <div class="carousel-dots">
     @for (p of filteredProjects; track p.title; let i = $index) {
-      <button class="carousel-dot" [class.active]="i === dotIndex" (click)="goTo(i)"></button>
+      <button class="carousel-dot" [class.active]="i === dotIndex" (click)="goTo(i)" [attr.aria-label]="'Go to ' + p.title"></button>
     }
   </div>
 </section>
@@ -73,20 +75,23 @@
   <div class="container">
     <h2 class="section-title">Certifications</h2>
     <span class="section-title-underline"></span>
-    <p class="section-subtitle">Continuous learning and growth</p>
+    <p class="section-subtitle">Click any certificate to verify credentials</p>
   </div>
-
   <div class="certs-scroll-wrap">
     <div class="certs-scroll-track">
       @for (cert of certDisplayList; track cert._key) {
         <div class="cert-card"
-          (click)="openCert(cert)"
+          (click)="openCertLink(cert)"
           tabindex="0"
-          (keydown.enter)="openCert(cert)"
-          role="button"
-          [attr.aria-label]="'View ' + cert.name">
+          (keydown.enter)="openCertLink(cert)"
+          role="link"
+          [attr.aria-label]="'View ' + cert.name + ' certificate'">
           <div class="cert-img-wrap">
             <img [src]="cert.image" [alt]="cert.name" loading="lazy">
+            <div class="cert-overlay">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>View Certificate</span>
+            </div>
           </div>
           <div class="cert-info">
             <h4>{{ cert.name }}</h4>
@@ -97,17 +102,3 @@
     </div>
   </div>
 </section>
-
-<!-- LIGHTBOX -->
-@if (lightboxCert) {
-  <div class="lightbox-overlay" (click)="closeCert()" role="dialog" aria-modal="true">
-    <div class="lightbox-box" (click)="$event.stopPropagation()">
-      <button class="lightbox-close" (click)="closeCert()" aria-label="Close">&#10005;</button>
-      <img [src]="lightboxCert.image" [alt]="lightboxCert.name" class="lightbox-img">
-      <div class="lightbox-meta">
-        <h3>{{ lightboxCert.name }}</h3>
-        <p>{{ lightboxCert.issuer }} · {{ lightboxCert.year }}</p>
-      </div>
-    </div>
-  </div>
-}
