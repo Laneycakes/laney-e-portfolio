@@ -1,137 +1,321 @@
-<!-- HERO -->
+<!-- ════════════════════════════════════════════════════════════
+     home.html — HOMEPAGE
+     ════════════════════════════════════════════════════════════
+
+     SECTIONS IN ORDER:
+     1. HERO          — big intro with your photo + floating tags
+     2. ABOUT PREVIEW — short paragraph linking to the about page
+     3. SKILLS MARQUEE — horizontal scrolling tech pills
+     4. FEATURED PROJECTS — two project cards
+
+     HOW TO CHANGE YOUR PHOTO:
+     Look for src="profile3.png" in the HERO section.
+     Replace "profile3.png" with whatever filename you
+     drop into the /public folder (e.g. "my-photo.jpg").
+     ════════════════════════════════════════════════════════════ -->
+
+
+<!-- ══════════════════════
+     1. HERO SECTION
+     ══════════════════════
+     Two columns: left = text, right = your photo.
+     The photo has a dark-pink overlay (the .avatar-img-overlay div).
+     Floating tags (Angular, Figma) bounce around the photo.
+     The scroll-hint line at the bottom nudges users to scroll down. -->
 <section class="hero" aria-label="Hero introduction">
+
+  <!-- Background blobs — purely decorative blurred circles.
+       blob-1 is top-right pink, blob-2 is bottom-left green.
+       Change their background color in home.css if you want
+       a different accent color. -->
   <div class="hero-bg-decor" aria-hidden="true">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
   </div>
+
   <div class="container hero-content">
+
+    <!-- ── LEFT COLUMN: Text + CTA buttons ── -->
     <div class="hero-text fade-in-up">
+
+      <!-- Greeting line above your name -->
       <p class="hero-greeting">Hello, I'm</p>
-      <h1 class="hero-name">Clarence Lane<br><span class="accent">Parungao</span></h1>
-      <p class="hero-role">Web Developer <span class="dot">|</span> UI/UX Designer</p>
-      <p class="hero-bio">Motivated web developer with hands-on experience in designing and developing user-friendly web applications. Proficient in front-end technologies and creative UI design.</p>
+
+      <!-- Your name. Change the text here to update what shows on screen. -->
+      <h1 class="hero-name">
+        Clarence Lane<br>
+        <span class="accent">Parungao</span>
+      </h1>
+
+      <!-- Role / title line. The | separators are styled as green dots via .dot -->
+      <p class="hero-role">
+        BSIT Student <span class="dot">|</span>
+        Web Developer <span class="dot">|</span>
+        UI/UX Enthusiast
+      </p>
+
+      <!-- Short bio paragraph. Keep this 2–3 sentences max for impact. -->
+      <p class="hero-bio">
+        Passionate about building responsive, user-friendly, and meaningful
+        digital experiences. Currently pursuing a Bachelor of Science in
+        Information Technology major in Web Development at Holy Angel
+        University while continuously learning, creating projects, and growing
+        as a developer.
+      </p>
+
+      <!-- CTA buttons. routerLink="/projects" and routerLink="/contact"
+           navigate to those pages inside the Angular app.
+           To change the button text, just edit what's between the tags. -->
       <div class="hero-cta">
         <a routerLink="/projects" class="btn btn-primary">View My Work</a>
         <a routerLink="/contact" class="btn btn-secondary">Let's Connect</a>
       </div>
     </div>
+
+    <!-- ── RIGHT COLUMN: Photo + floating tags ── -->
+    <!-- aria-hidden because this is decorative — screen readers skip it -->
     <div class="hero-visual" aria-hidden="true">
       <div class="avatar-container">
+
+        <!-- Animated blob ring around the photo -->
         <div class="avatar-ring"></div>
+
+        <!-- Soft gradient blob background behind the photo -->
         <div class="avatar-blob-bg"></div>
-        <img src="profile3.png" alt="Clarence Lane Parungao" class="avatar-photo">
-        <div class="floating-tag tag-html">HTML</div>
-        <div class="floating-tag tag-css">CSS</div>
-        <div class="floating-tag tag-js">JavaScript</div>
+
+        <!-- ★ YOUR PHOTO ★
+             Change "profile3.png" to your own image filename.
+             The image must be inside the /public (or /assets) folder.
+             e.g. src="my-headshot.jpg" or src="assets/lane-photo.png"
+             object-position: top in CSS keeps your face visible. -->
+        <img
+          src="Profile1.jpeg"
+          alt="Clarence Lane Parungao"
+          class="avatar-photo"
+        >
+
+        <!-- Dark-pink color overlay on the photo.
+             Controlled by .avatar-img-overlay in home.css.
+             To change the shade: find --overlay-color in home.css
+             and adjust the rgba() value.
+             To remove the overlay entirely, delete this div. -->
+        <div class="avatar-img-overlay" aria-hidden="true"></div>
+
+        <!-- Floating skill tags. Change the text to whatever you like.
+             Their positions (top/left/right/bottom) are set in home.css
+             under .tag-html and .tag-figma -->
+        <div class="floating-tag tag-html">Angular</div>
         <div class="floating-tag tag-figma">Figma</div>
+
       </div>
     </div>
+
   </div>
-  <div class="scroll-hint" aria-hidden="true"><div class="scroll-line"></div></div>
+
+  <!-- Subtle animated line that hints "scroll down" -->
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+  </div>
+
 </section>
 
-<!-- SKILLS + FEATURED PROJECTS — ONE ROW -->
-<section class="skills-and-featured" aria-label="Skills and featured projects">
-  <div class="container skills-featured-grid">
 
-    <!-- LEFT: Skills vertical marquee -->
-    <div class="skills-col-wrap">
-      <h2>Skills</h2>
-      <span class="section-title-underline" style="margin: 0 0 8px 0; display:block;"></span>
-      <p class="skills-subtitle">Technologies I work with</p>
-      <div class="marquee-wrap">
-        <!-- Column 1: scrolls UP -->
-        <div class="marquee-col marquee-col-up">
-          @for (skill of colA; track skill.name + 'u1') {
-            <div class="marquee-item">
-              <i [class]="skill.icon + ' marquee-icon'" aria-hidden="true"></i>
-              <span>{{ skill.name }}</span>
-            </div>
-          }
-          @for (skill of colA; track skill.name + 'u2') {
-            <div class="marquee-item" aria-hidden="true">
-              <i [class]="skill.icon + ' marquee-icon'"></i>
-              <span>{{ skill.name }}</span>
-            </div>
-          }
-        </div>
-        <!-- Column 2: scrolls DOWN -->
-        <div class="marquee-col marquee-col-down">
-          @for (skill of colB; track skill.name + 'd1') {
-            <div class="marquee-item">
-              <i [class]="skill.icon + ' marquee-icon'" aria-hidden="true"></i>
-              <span>{{ skill.name }}</span>
-            </div>
-          }
-          @for (skill of colB; track skill.name + 'd2') {
-            <div class="marquee-item" aria-hidden="true">
-              <i [class]="skill.icon + ' marquee-icon'"></i>
-              <span>{{ skill.name }}</span>
-            </div>
-          }
-        </div>
+<!-- ══════════════════════
+     2. ABOUT PREVIEW
+     ══════════════════════
+     A centered blurb about yourself with a "Learn More" button.
+     This is NOT the full about page — it's just a teaser.
+     Edit the paragraph text below to match your own words. -->
+<section class="about-preview">
+  <div class="container">
+    <div class="about-preview-content">
+
+      <!-- Small uppercase label above the heading -->
+      <span class="section-label">About Me</span>
+
+      <!-- Section heading -->
+      <h2>More Than Just Writing Code</h2>
+
+      <!-- Edit this paragraph to describe yourself in your own voice. -->
+      <p>
+        A BS Information Technology student specializing in Web Development at
+        Holy Angel University, passionate about creating responsive and
+        user-friendly digital experiences. With a strong foundation in
+        front-end technologies and UI/UX design, through academic projects,
+        leadership roles, and continuous learning, I strive to grow as a
+        developer while contributing positively to every team and project
+        I am part of.
+      </p>
+
+      <!-- Links to the full about page -->
+      <a routerLink="/about" class="btn btn-secondary">
+        Learn More About Me
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════
+     3. SKILLS MARQUEE
+     ══════════════════════
+     A horizontal ticker of your tech skills that scrolls automatically.
+
+     HOW THE LOOP WORKS:
+     Each skill pill is written TWICE in the HTML (see the "duplicate"
+     comment below). The CSS animation moves the track left by exactly
+     -50% — that's the width of one full set. When it snaps back to 0
+     it looks identical because the second set picks up exactly where
+     the first one ended. Result: perfectly seamless, no jump.
+
+     TO ADD A SKILL: copy one <span> line and change the icon class
+     and text. Add the same span in BOTH the original AND duplicate
+     blocks so the loop stays even.
+
+     TO REMOVE A SKILL: delete the <span> from both blocks.
+
+     ICON CLASSES come from devicons (devicon.dev).
+     Example: devicon-react-original colored -->
+<section class="skills-marquee-section">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Skills</span>
+      <h2>Technologies I Work With</h2>
+      <p>Tools and technologies I use to design, build, and improve digital experiences.</p>
+    </div>
+
+    <!-- overflow:hidden on this wrapper clips the scrolling track -->
+    <div class="skills-marquee">
+
+      <!-- The track moves left via CSS animation (skillScroll keyframe).
+           Hovering pauses it so you can read the labels. -->
+      <div class="skills-track">
+
+        <!-- ── ORIGINAL SET (items 1–10) ── -->
+        <span><i class="devicon-angular-plain colored"></i> Angular</span>
+        <span><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+        <span><i class="devicon-html5-plain colored"></i> HTML</span>
+        <span><i class="devicon-css3-plain colored"></i> CSS</span>
+        <span><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+        <span><i class="devicon-figma-plain colored"></i> Figma</span>
+        <span><i class="devicon-github-original"></i> GitHub</span>
+        <span><i class="devicon-flutter-plain colored"></i> Flutter</span>
+        <span><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
+        <span><i class="devicon-bootstrap-plain colored"></i> Bootstrap</span>
+
+        <!-- ── DUPLICATE SET (exact copy — needed for seamless loop) ──
+             Do NOT change this block without also changing the one above.
+             Both sets must always be identical. -->
+        <span><i class="devicon-angular-plain colored"></i> Angular</span>
+        <span><i class="devicon-typescript-plain colored"></i> TypeScript</span>
+        <span><i class="devicon-html5-plain colored"></i> HTML</span>
+        <span><i class="devicon-css3-plain colored"></i> CSS</span>
+        <span><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+        <span><i class="devicon-figma-plain colored"></i> Figma</span>
+        <span><i class="devicon-github-original"></i> GitHub</span>
+        <span><i class="devicon-flutter-plain colored"></i> Flutter</span>
+        <span><i class="devicon-tailwindcss-original colored"></i> Tailwind CSS</span>
+        <span><i class="devicon-bootstrap-plain colored"></i> Bootstrap</span>
+
       </div>
     </div>
 
-    <!-- RIGHT: Featured Projects flip cards -->
-    <div class="featured-col-wrap">
-      <h2>Featured Projects</h2>
-      <span class="section-title-underline" style="margin: 0 0 8px 0; display:block;"></span>
-      <p class="featured-subtitle">Hover the cards to learn more</p>
+  </div>
+</section>
 
-      <div class="flip-cards-row">
-        @for (project of featuredProjects; track project.title) {
-          <div class="flip-card" tabindex="0" [attr.aria-label]="project.title">
-            <div class="flip-card-inner">
-              <div class="flip-front">
-                <div class="flip-img-wrap">
-                  <img [src]="project.image" [alt]="project.title" class="flip-img">
-                  <span class="flip-badge" [class.in-progress]="project.status === 'In Progress'">
-                    {{ project.status === 'In Progress' ? 'In Progress' : project.status }}
-                  </span>
-                </div>
-                <div class="flip-front-body">
-                  <h3>{{ project.title }}</h3>
-                  <p class="flip-hint">Hover to see details →</p>
-                </div>
-              </div>
-              <div class="flip-back">
-                <div class="flip-back-body">
-                  <h3>{{ project.title }}</h3>
-                  <p>{{ project.description }}</p>
-                  <div class="flip-tags">
-                    @for (tool of project.tools; track tool) {
-                      <span class="tag">{{ tool }}</span>
-                    }
-                  </div>
-                  <a routerLink="/projects" class="btn flip-btn">View Details →</a>
-                </div>
-              </div>
-            </div>
+
+<!-- ══════════════════════
+     4. FEATURED PROJECTS
+     ══════════════════════
+     Two static project cards. These are hardcoded here (not from the TS array)
+     so you can quickly customize each one without touching TypeScript.
+
+     TO CHANGE A PROJECT IMAGE:
+     Find the <img src="..."> tag and replace the filename.
+     Images must be in your /public folder.
+
+     TO CHANGE PROJECT INFO:
+     Edit the <h3>, <p>, and <span> tags directly in each .project-card.
+
+     TO ADD A NEW CARD:
+     Copy one entire <!-- PROJECT CARD --> block and paste it inside
+     .projects-grid. -->
+<section class="featured-projects">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-label">Projects</span>
+      <h2>Project Highlights</h2>
+      <p>
+        A selection of projects that showcase my skills in web development,
+        UI/UX design, and problem-solving.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- ── PROJECT CARD 1: MJ Quality Cars ── -->
+      <div class="project-card">
+
+        <!-- Project screenshot. Replace "MJQualityCars.png" with your image file. -->
+        <img src="MJQualityCars.png" alt="MJ Quality Cars">
+
+        <div class="project-content">
+          <!-- Project title -->
+          <h3>MJ Quality Cars</h3>
+
+          <!-- Short description. 2–3 sentences works best. -->
+          <p>
+            A dealership website designed to strengthen online presence,
+            showcase available vehicles, and provide customers with an
+            easy way to explore quality second-hand cars.
+          </p>
+
+          <!-- Tech/skill tags. Add or remove <span> tags as needed. -->
+          <div class="project-tags">
+            <span>UI/UX Design</span>
+            <span>SEO</span>
+            <span>Figma</span>
           </div>
-        }
+
+          <!-- Links to the projects page for full details -->
+          <a routerLink="/projects" class="project-link">View Project →</a>
+        </div>
       </div>
 
-      <div class="see-all">
-        <a routerLink="/projects" class="btn btn-secondary">See All Projects →</a>
+      <!-- ── PROJECT CARD 2: Split Smart ── -->
+      <div class="project-card">
+
+        <!-- Replace "Splitsmart.png" with your screenshot filename. -->
+        <img src="Splitsmart.png" alt="Split Smart">
+
+        <div class="project-content">
+          <h3>Split Smart</h3>
+
+          <p>
+            A smart expense-sharing application designed through user research,
+            wireframing, prototyping, and UI/UX planning to simplify group
+            expense management.
+          </p>
+
+          <div class="project-tags">
+            <span>Figma</span>
+            <span>UI/UX</span>
+            <span>Documentation</span>
+          </div>
+
+          <a routerLink="/projects" class="project-link">View Project →</a>
+        </div>
       </div>
+
     </div>
 
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section class="cta-banner" aria-label="Call to action">
-  <div class="container cta-inner">
-    <div>
-      <h2>Let's Work Together</h2>
-      <p>Have a project in mind? I'd love to hear about it.</p>
+    <!-- "See all" button at the bottom -->
+    <div class="projects-btn">
+      <a routerLink="/projects" class="btn btn-secondary">View All Projects</a>
     </div>
-    <a routerLink="/contact" class="btn btn-primary">Get In Touch</a>
-  </div>
-  <div class="cta-wave-bottom" aria-hidden="true">
-    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,0 Q180,90 360,45 Q540,0 720,50 Q900,95 1080,40 Q1260,-15 1440,50 L1440,90 L0,90 Z" fill="#2c2c2c"/>
-    </svg>
+
   </div>
 </section>

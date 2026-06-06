@@ -1,3 +1,21 @@
+<!-- ════════════════════════════════════════════════════════════
+     about.html — ABOUT PAGE
+
+     SECTIONS IN ORDER:
+     1. PAGE HERO         — title banner
+     2. BIO + PHOTO       — your story and profile image
+     3. FUN FACTS         — 4 quick-stat cards
+     4. SKILLS            — tabbed grid + progress bars + soft skills
+     5. EXPERIENCE        — vertical timeline
+     6. EDUCATION         — university card
+
+     HOW TO CHANGE YOUR PHOTO HERE:
+     Find [src]="currentPhoto" — this pulls from the photos array
+     in about.ts. Edit that array to change which files cycle.
+     ════════════════════════════════════════════════════════════ -->
+
+
+<!-- ── 1. PAGE HERO BANNER ── -->
 <section class="page-hero about-hero">
   <div class="container">
     <h1>About <span class="accent">Me</span></h1>
@@ -5,41 +23,84 @@
   </div>
 </section>
 
+
+<!-- ── 2. BIO + PHOTO ── -->
 <section class="section about-main">
   <div class="container about-grid">
+
+    <!-- Left: Text bio + contact links + action buttons -->
     <div class="about-text-col">
       <h2>Hello, I'm <span class="accent">Lane</span></h2>
-      <p>I'm a motivated Web Developer and UI/UX designer with hands-on experience in designing and developing user-friendly web applications. I'm currently pursuing a Bachelor of Science in Information Technology at Holy Angel University, specializing in Web Development.</p>
-      <p>I'm proficient in front-end technologies including HTML, CSS, JavaScript, Angular, Vue.js, Flutter, Tailwind CSS, and more. I'm passionate about creating beautiful, accessible interfaces that solve real problems for real people.</p>
-      <p>Beyond code, I'm an active student leader — serving as an officer in CodeGeeks and a member of the Cybersecurity Intelligence Alliance.</p>
 
+      <!-- Edit these paragraphs freely — this is your story in your words. -->
+      <p>
+        A Bachelor of Science in Information Technology student at Holy Angel University,
+        specializing in Web Development and passionate about creating user-friendly and
+        meaningful digital experiences.
+      </p>
+      <p>
+        My interest in technology comes from the idea that great websites should do more
+        than function well — they should be intuitive, engaging, and enjoyable to use.
+        Through academic projects, leadership experiences, and continuous learning,
+        I've developed a growing passion for web development, UI/UX design, and
+        problem-solving.
+      </p>
+      <p>
+        Beyond technical skills, I value collaboration, adaptability, and continuous
+        growth. Whether developing a website, designing an interface, or supporting a
+        team, I approach every opportunity with curiosity and a willingness to improve.
+      </p>
+      <p>
+        This portfolio highlights my projects, experiences, and achievements throughout
+        my journey as a student and aspiring web developer. I look forward to growing
+        both professionally and personally while making meaningful contributions.
+      </p>
+
+      <!-- Contact links card -->
       <div class="about-contact-card">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=clc.parungao@gmail.com" target="_blank" rel="noopener" class="contact-item">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=clc.parungao@gmail.com"
+           target="_blank" rel="noopener" class="contact-item">
           <div class="contact-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
           </div>
           clc.parungao&#64;gmail.com
         </a>
+
         <div class="contact-item">
           <div class="contact-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
           </div>
           0946 - 310 - 4608
         </div>
-        <a href="https://linkedin.com/in/clarence-lane-parungao-84485533a/" target="_blank" rel="noopener" class="contact-item">
+
+        <a href="https://linkedin.com/in/clarence-lane-parungao-84485533a/"
+           target="_blank" rel="noopener" class="contact-item">
           <div class="contact-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+            </svg>
           </div>
           LinkedIn Profile
         </a>
-        <a href="https://github.com/Laneycakes" target="_blank" rel="noopener" class="contact-item">
+
+        <a href="https://github.com/Laneycakes"
+           target="_blank" rel="noopener" class="contact-item">
           <div class="contact-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
           </div>
-          github.com/Laneycakes
+          &#64;Laneycakes
         </a>
       </div>
 
+      <!-- Action buttons: download, view, contact.
+           Change the href filename if your PDF has a different name. -->
       <div class="about-actions">
         <a href="Resume_Parungao,ClarenceLane.pdf" download class="btn btn-primary">Download Resume</a>
         <a href="Resume_Parungao,ClarenceLane.pdf" target="_blank" rel="noopener" class="btn btn-secondary">View Resume</a>
@@ -47,48 +108,162 @@
       </div>
     </div>
 
+    <!-- Right: Profile photo with decorative rings + floating badges -->
     <div class="about-image-col">
       <div class="about-photo-wrap">
         <div class="photo-blob-bg"></div>
         <div class="photo-ring photo-ring-1"></div>
         <div class="photo-ring photo-ring-2"></div>
-        <img [src]="currentPhoto" alt="Clarence Lane Parungao" class="about-photo" [class.photo-fading]="photoFading">        
+
+        <!-- Photo cycles between files in the photos[] array in about.ts.
+             photo-fading triggers opacity: 0 during the crossfade. -->
+        <img [src]="currentPhoto"
+             alt="Clarence Lane Parungao"
+             class="about-photo"
+             [class.photo-fading]="photoFading">
+
+        <!-- Small floating labels on the photo -->
         <div class="photo-badge badge-1">Web Developer</div>
         <div class="photo-badge badge-2">UI/UX Designer</div>
+
+        <!-- Decorative dots -->
         <div class="photo-dot dot-a"></div>
         <div class="photo-dot dot-b"></div>
         <div class="photo-dot dot-c"></div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- SKILLS  -->
-<!-- SKILLS — interactive animated cards -->
-<section class="section skills-section" aria-label="Skills">
-  <div class="container">
-    <h2 class="section-title">Skills & Technologies</h2>
-    <span class="section-title-underline"></span>
-    <p class="section-subtitle">Technologies behind my work</p>
 
-    <div class="skills-group-label">Technical & Tools</div>
+<!-- ── 3. FUN FACTS BANNER ── -->
+<!--
+  Four stat cards shown in a pink gradient strip.
+  The data (value + label + icon) comes from funFacts[] in about.ts.
+  Update the values there as you finish more projects/certifications.
+-->
+<section class="facts-section" aria-label="Quick facts">
+  <div class="container facts-grid">
+    @for (fact of funFacts; track fact.label) {
+      <div class="fact-card">
+
+        <!-- SVG icon — rendered from the svg path string in about.ts.
+             The icon square has a semi-transparent white background. -->
+        <div class="fact-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24"
+               fill="none" stroke="white" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path [attr.d]="fact.svg"/>
+          </svg>
+        </div>
+
+        <!-- Big number (e.g. "5+") -->
+        <div class="fact-number">{{ fact.value }}</div>
+
+        <!-- Label below the number (e.g. "Projects Built") -->
+        <div class="fact-label">{{ fact.label }}</div>
+
+      </div>
+    }
+  </div>
+</section>
+
+
+<!-- ── 4. SKILLS & TECHNOLOGIES ──
+  Two parts:
+  A) Tabbed grid of tech skill cards with progress bars
+  B) Soft skills row with icon badges
+
+  The tabs filter the cards by category (frontend / design / tools / all).
+  All data lives in about.ts — edit there to add/remove skills.
+-->
+<section class="section skills-section" aria-label="Skills & Technologies">
+  <div class="container">
+    <h2 class="section-title">Skills &amp; Technologies</h2>
+    <span class="section-title-underline"></span>
+    <p class="section-subtitle">What I bring to the table</p>
+
+    <!-- ── A) Category tab buttons ──
+         Each tab sets activeSkillCategory in the TS,
+         which filters visibleSkills. [class.active] highlights
+         the selected tab. -->
+    <div class="skill-tabs" role="tablist" aria-label="Skill categories">
+      @for (tab of skillTabs; track tab.id) {
+        <button
+          class="skill-tab"
+          [class.active]="activeSkillCategory === tab.id"
+          (click)="setSkillCategory(tab.id)"
+          role="tab"
+          [attr.aria-selected]="activeSkillCategory === tab.id">
+
+          <!-- SVG icon inside the tab button — path comes from about.ts -->
+          <span class="tab-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path [attr.d]="tab.svg"/>
+            </svg>
+          </span>
+
+          {{ tab.label }}
+        </button>
+      }
+    </div>
+
+    <!-- ── Skill cards grid ──
+         visibleSkills is filtered by the active tab.
+         Each card floats gently and lifts on hover. -->
     <div class="skills-cards-grid">
-      @for (skill of allSkills; track skill.name) {
+      @for (skill of visibleSkills; track skill.name) {
         <div class="skill-card">
           <div class="skill-card-inner">
+
+            <!-- Devicon icon class set dynamically from allSkills[].icon -->
             <i [class]="skill.icon" aria-hidden="true"></i>
+
+            <!-- Skill name -->
             <span class="skill-card-name">{{ skill.name }}</span>
+
+            <!-- Level text: "Advanced" / "Proficient" / "Familiar" -->
+            <span class="skill-level-label">{{ skill.levelLabel }}</span>
+
+            <!-- Progress bar — width set by skill.level (0–100).
+                 Full opacity only on hover so it's not distracting. -->
+            <div class="skill-bar-wrap"
+                 [attr.aria-label]="skill.name + ' proficiency ' + skill.level + '%'">
+              <div class="skill-bar" [style.width.%]="skill.level"></div>
+            </div>
+
           </div>
+          <!-- Pink glow overlay that fades in on hover -->
           <div class="skill-card-glow"></div>
         </div>
       }
     </div>
 
-    <div class="skills-group-label" style="margin-top: 2rem;">Soft Skills</div>
+    <!-- ── B) Soft skills row ──
+         Each badge has: an SVG icon box, a name, and a short desc.
+         Data from softSkills[] in about.ts. -->
+    <div class="skills-group-label" style="margin-top: 3rem;">Soft Skills</div>
     <div class="soft-skills-row">
       @for (s of softSkills; track s.name) {
         <div class="soft-skill-badge">
-          <span>{{ s.name }}</span>
+
+          <!-- Green icon square — SVG path from about.ts -->
+          <span class="soft-skill-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path [attr.d]="s.svg"/>
+            </svg>
+          </span>
+
+          <div class="soft-skill-text">
+            <span class="soft-skill-name">{{ s.name }}</span>
+            <span class="soft-skill-desc">{{ s.desc }}</span>
+          </div>
+
         </div>
       }
     </div>
@@ -96,45 +271,73 @@
   </div>
 </section>
 
-<!-- EXPERIENCE — elegant timeline -->
+
+<!-- ── 5. EXPERIENCE TIMELINE ── -->
 <section class="experience-section" aria-label="Experience">
+  <!-- Decorative background orbs (blurred circles) -->
   <div class="exp-bg-orb exp-orb-1" aria-hidden="true"></div>
   <div class="exp-bg-orb exp-orb-2" aria-hidden="true"></div>
   <div class="exp-bg-orb exp-orb-3" aria-hidden="true"></div>
+
   <div class="container">
-    <h2 class="section-title">Experience & Involvement</h2>
+    <h2 class="section-title">Experience &amp; Involvement</h2>
     <span class="section-title-underline"></span>
-    <p class="section-subtitle">Leadership and community</p>
+    <p class="section-subtitle">Leadership, community, and growth</p>
+
+    <!-- Timeline — data from experiences[] in about.ts.
+         To add an entry: add an object to that array. -->
     <div class="timeline">
       @for (exp of experiences; track exp.role) {
         <article class="timeline-item">
+
+          <!-- Dot on the vertical line -->
           <div class="timeline-dot-wrap">
             <div class="timeline-dot"></div>
           </div>
+
           <div class="timeline-card">
             <div class="timeline-card-left">
+              <!-- Organization name -->
               <h3 class="timeline-org">{{ exp.org }}</h3>
+              <!-- Role / title -->
               <p class="timeline-role">{{ exp.role }}</p>
+              <!-- Description paragraph (from resume) -->
+              @if (exp.desc) {
+                <p class="timeline-desc">{{ exp.desc }}</p>
+              }
             </div>
+            <!-- Date badge on the right -->
             <span class="timeline-badge">{{ exp.period }}</span>
           </div>
+
         </article>
       }
     </div>
   </div>
 </section>
 
-<!-- EDUCATION -->
+
+<!-- ── 6. EDUCATION ── -->
 <section class="section education-section" aria-label="Education">
   <div class="container">
     <h2 class="section-title">Education</h2>
     <span class="section-title-underline"></span>
+
+    <!-- Single education card.
+         To add another degree: duplicate this .edu-card div. -->
     <div class="edu-card card">
       <div class="edu-icon" aria-hidden="true">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#2b7525" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+             stroke="#2b7525" stroke-width="1.5">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
       </div>
       <div>
-        <h3><a href="https://www.hau.edu.ph/" target="_blank" rel="noopener" class="edu-link">Holy Angel University</a></h3>
+        <!-- Change the href if the university URL ever changes -->
+        <h3><a href="https://www.hau.edu.ph/" target="_blank" rel="noopener" class="edu-link">
+          Holy Angel University
+        </a></h3>
         <p class="edu-degree">Bachelor of Science in Information Technology</p>
         <p class="edu-spec">Area of Specialization: Web Development</p>
         <p class="edu-period">2023 – 2027 · Pampanga, Philippines</p>

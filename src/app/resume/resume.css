@@ -1,7 +1,44 @@
+/* ════════════════════════════════════════════════════════════
+   resume.css — RESUME PAGE STYLES
+
+   WHAT'S NEW IN THIS VERSION:
+   - .entry-spec      → "Area of Specialization: Web Development"
+                        grey text under the degree name
+   - .entry-location  → "Pampanga, Philippines" text
+   - .entry-desc      → description paragraph under each experience entry
+                        (was missing before — now matches the PDF)
+   - .soft-dot        → green dot bullet in the soft skills list
+   - All existing styles are kept and commented
+
+   COLOR VARIABLES (from styles.css):
+   --pink        : main pink
+   --pink-dark   : darker pink (links, labels, badges)
+   --pink-light  : soft pink background
+   --green       : accent green (section titles, tags)
+   --border      : light grey border
+   --text-dark   : near-black text
+   --text-muted  : grey secondary text
+   --off-white   : light warm background
+   --shadow      : soft box-shadow
+   --radius      : default border-radius
+   --radius-sm   : smaller border-radius
+   --transition  : default transition shorthand
+   ════════════════════════════════════════════════════════════ */
+
+
+/* ── Page hero ── */
 .resume-hero { background: linear-gradient(135deg, var(--pink-light), var(--off-white)); }
 .resume-hero .accent { color: var(--pink); }
+
+/* Pushes the download button away from the subtitle */
 .resume-dl-btn { margin-top: 24px; }
 
+
+/* ══════════════════════
+   TWO-COLUMN LAYOUT
+   ══════════════════════
+   Left: 300px fixed sidebar (sticky)
+   Right: flex 1 main content area */
 .resume-layout {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -9,6 +46,8 @@
   align-items: start;
 }
 
+/* The sidebar sticks in place as the user scrolls the main content.
+   top: 100px clears the fixed navbar. */
 .resume-sidebar {
   display: flex;
   flex-direction: column;
@@ -17,80 +56,333 @@
   top: 100px;
 }
 
+
+/* ══════════════════════
+   SIDEBAR: Photo card
+   ══════════════════════
+   Pink-to-dark-pink gradient background, centered layout. */
 .sidebar-card {
   background: linear-gradient(135deg, var(--pink), var(--pink-dark));
   border-radius: var(--radius);
   padding: 28px 20px;
   text-align: center;
 }
-.sidebar-avatar { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; border: 3px solid rgba(255,255,255,0.5); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
-.sidebar-photo { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.sidebar-card h3 { color: white; font-size: 0.95rem; margin-bottom: 4px; }
-.sidebar-role { color: rgba(255,255,255,0.8); font-size: 0.82rem; }
 
-.sidebar-section { background: white; border-radius: var(--radius-sm); padding: 18px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
-.sidebar-section h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink-dark); margin-bottom: 10px; font-family: var(--font-body); font-weight: 700; }
-.sidebar-section p { font-size: 0.83rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
-.sidebar-link { font-size: 0.83rem; color: var(--green); text-decoration: none; transition: var(--transition); display: flex; align-items: center; gap: 8px; }
+/* Circular photo frame */
+.sidebar-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* The <img> inside the avatar frame.
+   object-position: top keeps the face visible. */
+.sidebar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.sidebar-card h3    { color: white; font-size: 0.95rem; margin-bottom: 4px; }
+.sidebar-role       { color: rgba(255, 255, 255, 0.8); font-size: 0.82rem; }
+
+
+/* ══════════════════════
+   SIDEBAR: White section cards
+   (Contact, Technical Skills, Soft Skills)
+   ══════════════════════ */
+.sidebar-section {
+  background: white;
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Section heading (e.g. "CONTACT", "TECHNICAL SKILLS") */
+.sidebar-section h4 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pink-dark);
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+/* Plain text line (phone, location) */
+.sidebar-section p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Clickable link (email, LinkedIn, GitHub) */
+.sidebar-link {
+  font-size: 0.83rem;
+  color: var(--green);
+  text-decoration: none;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .sidebar-link:hover { color: var(--pink-dark); }
-.slink-icon { font-size: 0.8rem; color: var(--pink-dark); width: 16px; text-align: center; flex-shrink: 0; }
 
-.sidebar-skills-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+/* Icon square next to each contact line */
+.slink-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pink-dark);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+
+/* ── Technical Skills: chip grid ── */
+.sidebar-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Individual skill chip (icon + name) */
 .sidebar-skill-chip {
-  display: flex; align-items: center; gap: 5px;
-  padding: 5px 10px; border-radius: 50px;
-  background: var(--off-white); border: 1px solid var(--border);
-  font-size: 0.76rem; font-weight: 600; color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 50px;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-dark);
   transition: var(--transition);
 }
-.sidebar-skill-chip:hover { background: var(--pink-light); border-color: var(--pink); }
+.sidebar-skill-chip:hover {
+  background: var(--pink-light);
+  border-color: var(--pink);
+}
+
+/* Devicon icon inside the chip */
 .sidebar-skill-chip i { font-size: 1rem; }
+
+/* Angular icon color override */
 .devicon-angular-plain.colored { color: #dd0031 !important; }
 
-.soft-skills-list { display: flex; flex-direction: column; gap: 8px; }
+
+/* ── Soft Skills: list ── */
+.soft-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Individual soft skill row */
 .soft-skill-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 7px 12px; border-radius: var(--radius-sm);
-  background: var(--off-white); border: 1px solid var(--border);
-  font-size: 0.83rem; font-weight: 500; color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--text-dark);
   transition: var(--transition);
 }
-.soft-skill-row:hover { background: var(--pink-light); border-color: var(--pink); }
-.soft-emoji { font-size: 1rem; }
+.soft-skill-row:hover {
+  background: var(--pink-light);
+  border-color: var(--pink);
+}
 
-.resume-main { display: flex; flex-direction: column; gap: 32px; }
+/* Green dot bullet at the start of each soft skill row */
+.soft-dot {
+  color: var(--green);
+  font-size: 0.55rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
 
-.resume-block { background: white; border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow); }
-.block-title { font-size: 1.1rem; color: var(--green); padding-bottom: 12px; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
 
-.resume-entry { margin-bottom: 20px; }
+/* ══════════════════════
+   MAIN CONTENT
+   ══════════════════════ */
+
+.resume-main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* White card wrapper for each section */
+.resume-block {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+}
+
+/* Green section title with bottom border (e.g. "Education", "Projects") */
+.block-title {
+  font-size: 1.1rem;
+  color: var(--green);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border);
+}
+
+
+/* ── Resume entry (used by all sections) ── */
+
+.resume-entry {
+  margin-bottom: 24px; /* slightly more space between entries */
+}
 .resume-entry:last-child { margin-bottom: 0; }
-.entry-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
-.entry-header h3 { font-size: 0.95rem; font-family: var(--font-body); font-weight: 700; margin: 0; }
-.entry-sub { color: var(--pink-dark); font-size: 0.87rem; font-weight: 600; margin-top: 2px; }
-.entry-list { padding-left: 18px; }
-.entry-list li { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 4px; }
 
-.cert-click-hint { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px; font-style: italic; }
-.cert-resume-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+/* Header row: org/title left, date tag right */
+.entry-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+/* Organization / project name */
+.entry-header h3 {
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Role / degree name — shown in pink */
+.entry-sub {
+  color: var(--pink-dark);
+  font-size: 0.87rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* "Area of Specialization: Web Development" — grey, smaller */
+.entry-spec {
+  color: var(--text-muted);
+  font-size: 0.83rem;
+  margin-top: 2px;
+}
+
+/* "Pampanga, Philippines" location line */
+.entry-location {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Bullet list under project entries */
+.entry-list { padding-left: 18px; margin-top: 6px; }
+.entry-list li {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+/* Description paragraph under experience entries.
+   NEW — was missing before. Matches the PDF format. */
+.entry-desc {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-top: 6px;
+  max-width: 640px;
+}
+
+
+/* ── Certifications ── */
+
+/* Small italic hint above the cert grid */
+.cert-click-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+/* 2-column grid of clickable cert items */
+.cert-resume-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+/* Individual clickable cert row */
 .cert-resume-item {
-  display: flex; align-items: center; gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 10px 14px;
-  background: var(--off-white); border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm); cursor: pointer;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
   transition: var(--transition);
 }
-.cert-resume-item:hover { border-color: var(--pink); background: var(--pink-light); transform: translateX(4px); box-shadow: var(--shadow); }
-.cert-dot { color: var(--pink); font-size: 0.65rem; margin-top: 2px; flex-shrink: 0; }
+.cert-resume-item:hover {
+  border-color: var(--pink);
+  background: var(--pink-light);
+  transform: translateX(4px);
+  box-shadow: var(--shadow);
+}
+
+/* Pink dot bullet on the left */
+.cert-dot {
+  color: var(--pink);
+  font-size: 0.65rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
 .cert-text { flex: 1; }
-.cert-name { font-size: 0.87rem; font-weight: 600; color: var(--text-dark); }
-.cert-issuer { font-size: 0.77rem; color: var(--text-muted); }
-.cert-link-icon { font-size: 0.85rem; color: var(--green); flex-shrink: 0; opacity: 0; transition: opacity 0.2s ease; }
+
+/* Certificate name (bold) */
+.cert-name {
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* "Issuer · Year" line */
+.cert-issuer {
+  font-size: 0.77rem;
+  color: var(--text-muted);
+}
+
+/* ↗ link icon that fades in on hover */
+.cert-link-icon {
+  font-size: 0.85rem;
+  color: var(--green);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
 .cert-resume-item:hover .cert-link-icon { opacity: 1; }
 
-@media (max-width: 1024px) { .resume-layout { grid-template-columns: 1fr; } .resume-sidebar { position: static; } }
-@media (max-width: 768px) { .cert-resume-grid { grid-template-columns: 1fr; } .resume-block { padding: 20px; } }
-
+/* Edu page link */
 .edu-link {
   color: var(--text-dark);
   text-decoration: none;
@@ -99,4 +391,21 @@
 .edu-link:hover {
   color: var(--green);
   text-decoration: underline;
+}
+
+
+/* ══════════════════════
+   RESPONSIVE
+   ══════════════════════ */
+
+/* Stack sidebar above content on tablet */
+@media (max-width: 1024px) {
+  .resume-layout { grid-template-columns: 1fr; }
+  .resume-sidebar { position: static; } /* un-sticky on mobile */
+}
+
+/* Single column cert grid + less padding on mobile */
+@media (max-width: 768px) {
+  .cert-resume-grid { grid-template-columns: 1fr; }
+  .resume-block { padding: 20px; }
 }

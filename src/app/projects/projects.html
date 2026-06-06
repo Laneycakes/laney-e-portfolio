@@ -1,3 +1,25 @@
+<!-- ════════════════════════════════════════════════════════════
+     projects.html — PROJECTS PAGE
+
+     LAYOUT:
+     - Left column : thumbnail strip (scrolls only when user hovers + drags,
+                     or when .scrolling class is added by the strip itself)
+     - Right column: big preview panel (image + title + description + nav)
+
+     HOW THE THUMBNAIL STRIP WORKS:
+     The strip is scrollable by the user (overflow-y: scroll).
+     It does NOT auto-advance the active project.
+     Clicking a thumbnail calls selectProject(i) which triggers a
+     smooth crossfade on the right panel.
+
+     HOW TO CHANGE PROJECT IMAGES:
+     Open projects.ts and find the allProjects array.
+     Each project has an `image` field with a filename.
+     Replace that filename with your screenshot file in /public.
+     ════════════════════════════════════════════════════════════ -->
+
+
+<!-- Page hero banner -->
 <section class="page-hero projects-hero">
   <div class="container">
     <h1>My <span class="accent">Projects</span></h1>
@@ -5,98 +27,266 @@
   </div>
 </section>
 
-<section class="section">
+
+<!-- ══════════════════════════════════════════
+     MAIN SHOWCASE
+     ══════════════════════════════════════════ -->
+<section class="section projects-showcase">
   <div class="container">
+
+    <!-- ── Filter bar ──
+         Clicking a button calls setFilter() in projects.ts.
+         The active button gets a pink filled style via [class.active]. -->
     <div class="filter-bar" role="group" aria-label="Filter projects">
       @for (filter of filters; track filter) {
-        <button class="filter-btn" [class.active]="activeFilter === filter" (click)="setFilter(filter)">{{ filter }}</button>
+        <button
+          class="filter-btn"
+          [class.active]="activeFilter === filter"
+          (click)="setFilter(filter)">
+          {{ filter }}
+        </button>
       }
     </div>
-    <p class="nav-hint">Use ← → arrow keys or swipe to navigate</p>
-  </div>
 
-  <div class="carousel-controls">
-    <button class="carousel-arrow" (click)="prevSlide()" aria-label="Previous project">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
+    <!-- ── Two-column grid: thumbnail strip LEFT, preview panel RIGHT ── -->
+    <div class="showcase-grid">
 
-    <div class="proj-carousel-outer">
-      <div class="proj-carousel-inner"
-        [class.ready]="carouselReady"
-        [style.transform]="'translateX(' + offset + 'px)'">
-        @for (p of displayProjects; track p.title + $index; let i = $index) {
-          <article class="proj-card"
-            [class.center]="i === activeIndex"
-            [class.clickable]="!!p.siteUrl"
-            (click)="openSite(p.siteUrl)">
-            <div class="proj-banner">
-              <img [src]="p.image" [alt]="p.title" class="proj-img">
-              <span class="proj-badge" [class.in-progress]="p.status === 'In Progress'">
-                {{ p.status === 'In Progress' ? 'In Progress' : 'Completed ' + p.status }}
-              </span>
-              @if (p.siteUrl) {
-                <div class="proj-visit-overlay">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                  <span>Visit Site</span>
-                </div>
+
+      <!-- ════════════════════════
+           LEFT: Thumbnail strip
+           ════════════════════════
+           This is a normal scrollable container.
+           The user scrolls through it manually.
+           The top and bottom edges fade out via a CSS mask.
+           Clicking a thumbnail selects that project. -->
+      <div class="thumb-strip-outer" aria-label="Project thumbnails">
+
+        <div class="thumb-strip-mask">
+
+          <!-- Scrollable inner container.
+               overflow-y: scroll is set in CSS.
+               The user scrolls this themselves — no auto-scroll. -->
+          <div class="thumb-track">
+
+            <!-- Each thumbnail is one project.
+                 [class.active] adds the pink highlight border.
+                 (click) calls selectProject(i) which crossfades the right panel.
+                 (mouseenter/mouseleave) are kept in case you re-enable auto-advance later. -->
+            @for (p of filteredProjects; track p.title; let i = $index) {
+              <div
+                class="thumb-item"
+                [class.active]="activeProjectIndex === i"
+                (click)="selectProject(i)"
+                role="button"
+                [attr.aria-label]="'View ' + p.title"
+                tabindex="0"
+                (keydown.enter)="selectProject(i)">
+
+                <!-- Project thumbnail image.
+                     Filename comes from allProjects[].image in projects.ts. -->
+                <img [src]="p.image" [alt]="p.title" class="thumb-img" loading="lazy">
+
+                <!-- Small pink dot that appears on the active thumbnail -->
+                <div class="thumb-active-dot" aria-hidden="true"></div>
+
+              </div>
+            }
+
+          </div>
+        </div>
+
+        <!-- Up / Down arrow buttons for keyboard/click navigation of the strip.
+             These call prevProject() and nextProject() in projects.ts. -->
+        <div class="thumb-strip-nav">
+          <button class="thumb-nav-btn" (click)="prevProject()" aria-label="Previous project">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5">
+              <polyline points="18 15 12 9 6 15"/>
+            </svg>
+          </button>
+          <button class="thumb-nav-btn" (click)="nextProject()" aria-label="Next project">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+
+
+      <!-- ════════════════════════
+           RIGHT: Preview panel
+           ════════════════════════
+           Shows the big screenshot + project details.
+           *ngIf hides this panel if no project is selected
+           (shouldn't happen in normal use). -->
+      <div class="preview-panel" *ngIf="activeProject">
+
+        <!-- ── Big screenshot ── -->
+        <div class="preview-img-wrap">
+
+          <!-- The image fades out/in when switching projects.
+               [class.switching] = true triggers opacity:0 in CSS,
+               then the TS swaps the src and removes the class.
+               TO CHANGE A PROJECT IMAGE: edit image field in projects.ts. -->
+          <img
+            [src]="activeProject.image"
+            [alt]="activeProject.title"
+            class="preview-img"
+            [class.switching]="previewSwitching">
+
+          <!-- Status badge: pink for "In Progress", green for completed years -->
+          <span class="preview-badge"
+                [class.in-progress]="activeProject.status === 'In Progress'">
+            {{ activeProject.status === 'In Progress' ? 'In Progress' : 'Completed ' + activeProject.status }}
+          </span>
+
+          <!-- "Visit Live Site" hover overlay — only shown if siteUrl is set in projects.ts -->
+          @if (activeProject.siteUrl) {
+            <a
+              [href]="activeProject.siteUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="preview-visit-overlay"
+              aria-label="Visit {{ activeProject.title }}">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                   stroke="white" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              <span>Visit Live Site</span>
+            </a>
+          }
+        </div>
+
+        <!-- ── Project details card ──
+             Fades out/in together with the image during transitions.
+             [class.switching] mirrors the image transition. -->
+        <div class="preview-details" [class.switching]="previewSwitching">
+
+          <div class="preview-header">
+            <div>
+              <!-- Project title and category pill -->
+              <h2 class="preview-title">{{ activeProject.title }}</h2>
+              <span class="preview-category">{{ activeProject.category }}</span>
+            </div>
+
+            <!-- X / Y counter shows position in the list (e.g. "2 / 5") -->
+            <div class="preview-counter">
+              <span class="counter-current">{{ activeProjectIndex + 1 }}</span>
+              <span class="counter-sep">/</span>
+              <span class="counter-total">{{ filteredProjects.length }}</span>
+            </div>
+          </div>
+
+          <!-- Project description paragraph from projects.ts -->
+          <p class="preview-desc">{{ activeProject.description }}</p>
+
+          <!-- Tool/tech tag pills from projects.ts -->
+          <div class="preview-tools">
+            @for (tool of activeProject.tools; track tool) {
+              <span class="tag tag-green">{{ tool }}</span>
+            }
+          </div>
+
+          <!-- ── Prev / dot indicators / Next navigation ── -->
+          <div class="preview-nav">
+
+            <!-- Previous button — calls prevProject() in projects.ts -->
+            <button class="prev-next-btn"
+                    (click)="prevProject()"
+                    [disabled]="filteredProjects.length <= 1">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+              Previous
+            </button>
+
+            <!-- Dot indicators — one dot per project.
+                 Clicking a dot selects that project directly.
+                 Active dot is wider (pill shape) via CSS. -->
+            <div class="dot-strip">
+              @for (p of filteredProjects; track p.title; let i = $index) {
+                <button
+                  class="dot-btn"
+                  [class.active]="i === activeProjectIndex"
+                  (click)="selectProject(i)"
+                  [attr.aria-label]="'Go to ' + p.title">
+                </button>
               }
             </div>
-            <div class="proj-body">
-              <div class="proj-header">
-                <h3>{{ p.title }}</h3>
-                <span class="tag">{{ p.category }}</span>
-              </div>
-              <p class="proj-desc">{{ p.description }}</p>
-              <div class="proj-tools">
-                @for (tool of p.tools; track tool) {
-                  <span class="tag tag-green">{{ tool }}</span>
-                }
-              </div>
-            </div>
-          </article>
-        }
+
+            <!-- Next button — calls nextProject() in projects.ts -->
+            <button class="prev-next-btn"
+                    (click)="nextProject()"
+                    [disabled]="filteredProjects.length <= 1">
+              Next
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+
+          </div>
+        </div>
       </div>
+
     </div>
-
-    <button class="carousel-arrow" (click)="nextSlide()" aria-label="Next project">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-
-  <div class="carousel-dots">
-    @for (p of filteredProjects; track p.title; let i = $index) {
-      <button class="carousel-dot" [class.active]="i === dotIndex" (click)="goTo(i)" [attr.aria-label]="'Go to ' + p.title"></button>
-    }
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
+
+<!-- ══════════════════════════════════════════
+     CERTIFICATIONS
+     Horizontal scrolling strip of cert cards.
+     Data from certDisplayList[] in projects.ts.
+     Clicking any card opens the verification URL.
+     ══════════════════════════════════════════ -->
 <section class="section certs-section" aria-label="Certifications">
   <div class="container">
     <h2 class="section-title">Certifications</h2>
     <span class="section-title-underline"></span>
     <p class="section-subtitle">Click any certificate to verify credentials</p>
   </div>
+
+  <!-- Overflow hidden + mask creates the fade-in/out edges -->
   <div class="certs-scroll-wrap">
+
+    <!-- The track scrolls left infinitely via CSS animation.
+         certDisplayList is the doubled array from buildCertList(). -->
     <div class="certs-scroll-track">
       @for (cert of certDisplayList; track cert._key) {
         <div class="cert-card"
-          (click)="openCertLink(cert)"
-          tabindex="0"
-          (keydown.enter)="openCertLink(cert)"
-          role="link"
-          [attr.aria-label]="'View ' + cert.name + ' certificate'">
+             (click)="openCertLink(cert)"
+             tabindex="0"
+             (keydown.enter)="openCertLink(cert)"
+             role="link"
+             [attr.aria-label]="'View ' + cert.name + ' certificate'">
+
           <div class="cert-img-wrap">
+            <!-- Certificate image. Filename from certifications[].image in projects.ts. -->
             <img [src]="cert.image" [alt]="cert.name" loading="lazy">
+
+            <!-- "View Certificate" overlay on hover -->
             <div class="cert-overlay">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                   stroke="white" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
               <span>View Certificate</span>
             </div>
           </div>
+
           <div class="cert-info">
             <h4>{{ cert.name }}</h4>
             <p>{{ cert.issuer }} · {{ cert.year }}</p>
           </div>
+
         </div>
       }
     </div>
