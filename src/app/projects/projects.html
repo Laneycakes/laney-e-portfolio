@@ -37,7 +37,7 @@
     <!-- ── Filter bar ──
          Clicking a button calls setFilter() in projects.ts.
          The active button gets a pink filled style via [class.active]. -->
-    <div class="filter-bar" role="group" aria-label="Filter projects">
+    <!-- <div class="filter-bar" role="group" aria-label="Filter projects">
       @for (filter of filters; track filter) {
         <button
           class="filter-btn"
@@ -46,7 +46,7 @@
           {{ filter }}
         </button>
       }
-    </div>
+    </div> -->
 
     <!-- ── Two-column grid: thumbnail strip LEFT, preview panel RIGHT ── -->
     <div class="showcase-grid">
@@ -170,7 +170,7 @@
             <div>
               <!-- Project title and category pill -->
               <h2 class="preview-title">{{ activeProject.title }}</h2>
-              <span class="preview-category">{{ activeProject.category }}</span>
+              <!-- <span class="preview-category">{{ activeProject.category }}</span> -->
             </div>
 
             <!-- X / Y counter shows position in the list (e.g. "2 / 5") -->

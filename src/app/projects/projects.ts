@@ -66,8 +66,8 @@ export class Projects implements OnInit, OnDestroy {
      TO ADD A FILTER: add a string to this array AND make sure
      at least one project has a matching category field below.
      TO REMOVE: delete the string from this array. */
-  filters = ['All', 'UI/UX', 'Frontend', 'Full Stack', 'SEO'];
-  activeFilter = 'All';
+  // filters = ['All', 'UI/UX', 'Frontend', 'Full Stack', 'SEO'];
+  // activeFilter = 'All';
 
 
   /* ════════════════════════════════════════
@@ -93,11 +93,11 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: "Laney's E-Portfolio",
       description:
-        'A responsive personal portfolio website built with Angular, showcasing projects, skills, leadership experiences, and achievements. Designed with a custom pink-and-green brand identity.',
+        'A responsive portfolio website developed with Angular to showcase my projects, technical skills, leadership experiences, certifications, and achievements. Designed with a custom visual identity focused on usability, accessibility, and responsive design.',  
       tools: ['Angular', 'TypeScript', 'CSS', 'Responsive Design', 'SEO'],
       category: 'Frontend',
       image: 'Logo.png',          /* ← swap with a screenshot of the portfolio */
-      status: 'In Progress',
+      status: '2026',
       siteUrl: ''
     },
     {
@@ -107,13 +107,13 @@ export class Projects implements OnInit, OnDestroy {
       tools: ['UI/UX Design', 'SEO', 'Figma', 'Blog Content', 'Documentation'],
       category: 'SEO',
       image: 'MJQualityCars.png',    /* ← screenshot of the MJ Quality Cars site */
-      status: 'In Progress',
+      status: '2026',
       siteUrl: 'https://www.mjqualitycars.com/'
     },
     {
       title: 'SplitSmart',
       description:
-        'A web-based bill-splitting application developed with a student team. Contributed to the back-end architecture using Node.js, Express.js, and MongoDB, as well as UI/UX wireframes and overall user flow.',
+        'A web-based bill-splitting application developed with a student team. Contributed to the back-end architecture using Node.js, Express.js, and MongoDB while assisting with user flow planning and interface design.',
       tools: ['Node.js', 'Express.js', 'MongoDB', 'Figma', 'UI/UX'],
       category: 'Full Stack',
       image: 'Splitsmart.png',       /* ← screenshot of SplitSmart */
@@ -123,7 +123,7 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: 'StudioSpot',
       description:
-        'A web-based studio rental management system. Focused on UI/UX design — including wireframes for booking and management flows — and structured project documentation.',
+        'Collaborated on a web-based studio rental management system, focusing on UI/UX design, wireframing, and project documentation to support booking and management workflows.',
       tools: ['Figma', 'UI/UX Design', 'Wireframing', 'Documentation'],
       category: 'UI/UX',
       image: 'StudioSpot.jpg',       /* ← screenshot of StudioSpot */
@@ -133,7 +133,7 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: 'PookieEater',
       description:
-        'A responsive website prototype for a homemade cookie business. Showcases products, pricing, and customer reviews. Designed and developed from scratch as a front-end practice project.',
+        'Collaborated on a web-based studio rental management system, focusing on UI/UX design, wireframing, and project documentation to support booking and management workflows.', 
       tools: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
       category: 'Frontend',
       image: 'PookieEater.png',      /* ← screenshot of PookieEater */
@@ -191,16 +191,16 @@ export class Projects implements OnInit, OnDestroy {
      FILTER
      ════════════════════════════════════════ */
 
-  setFilter(filter: string): void {
-    this.activeFilter = filter;
-    this.filteredProjects =
-      filter === 'All'
-        ? this.allProjects
-        : this.allProjects.filter(p => p.category === filter);
+  // setFilter(filter: string): void {
+  //   this.activeFilter = filter;
+  //   this.filteredProjects =
+  //     filter === 'All'
+  //       ? this.allProjects
+  //       : this.allProjects.filter(p => p.category === filter);
 
-    /* Reset to the first project when filter changes */
-    this.activeProjectIndex = 0;
-  }
+  //   /* Reset to the first project when filter changes */
+  //   this.activeProjectIndex = 0;
+  // }
 
 
   /* ════════════════════════════════════════
