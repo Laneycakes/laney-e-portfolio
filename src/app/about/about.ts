@@ -34,7 +34,7 @@ export class About implements OnInit, OnDestroy {
      Files must be in your /public folder.
      TO ADD MORE: e.g. ['profile.png', 'profile2.png', 'profile3.png']
      TO STOP CYCLING: remove the setInterval in ngOnInit. */
-  photos = ['profile.png', 'profile2.png'];
+  photos = ['profile.webp', 'profile2.webp'];
   currentPhotoIndex = 0;
   currentPhoto = this.photos[0];
   photoFading = false;
