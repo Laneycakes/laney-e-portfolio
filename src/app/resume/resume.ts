@@ -97,9 +97,6 @@ export class Resume {
   /* ════════════════════════════════════════
      PROJECTS (main content)
      ════════════════════════════════════════
-     Added Laney's E-Portfolio from the PDF.
-     Points updated to match the PDF descriptions exactly.
-
      status:
      - "In Progress" → renders as a pink badge
      - Any year string (e.g. "2025") → renders as a green badge
@@ -109,35 +106,35 @@ export class Resume {
       title: "Laney's E-Portfolio — Personal Portfolio Website",
       status: '2026',
       points: [
-        'Developed a responsive portfolio website showcasing projects, skills, leadership experiences, and achievements.',
+        'Designed and developed a responsive portfolio website to showcase my projects, skills, and achievements, with a focus on user-friendly navigation and modern web design.',
       ]
     },
     {
       title: 'MJ Quality Cars — Car Dealership Website',
       status: '2026',
       points: [
-        'Designed UI/UX wireframes, implemented SEO strategies, created blog content, and prepared project documentation to improve online visibility and user experience.',
+        'Created UI/UX wireframes and contributed to website content and documentation, focusing on improving usability, visual appeal, and the overall user experience.',
       ]
     },
     {
       title: 'SplitSmart — Web App Bill-Splitting System',
       status: '2025',
       points: [
-        'Developed a web-based bill-splitting application with a student team and contributed to the back-end architecture using Node.js, Express.js, and MongoDB.',
+        'Collaborated with a student team in designing a web-based bill-splitting application, contributing to interface planning, user experience design, and project documentation.',
       ]
     },
     {
       title: 'StudioSpot — Studio Rental Management System',
       status: '2025',
       points: [
-        'Collaborated on a web-based studio rental system, focusing on UI/UX design and project documentation.',
+        'Contributed to the UI/UX design and documentation of a studio rental management system, focusing on intuitive user flows and a seamless booking experience.',
       ]
     },
     {
       title: 'PookieEater — Cookie Website Prototype',
       status: '2024',
       points: [
-        'Designed and developed a responsive website prototype showcasing products, pricing, and customer reviews for a homemade cookie business.',
+        'Designed and developed a responsive website prototype for a homemade cookie business, showcasing products and customer reviews with a focus on accessibility and user engagement.',
       ]
     },
   ];
@@ -145,9 +142,6 @@ export class Resume {
   /* ════════════════════════════════════════
      EXPERIENCE & LEADERSHIP (main content)
      ════════════════════════════════════════
-     Updated to exactly match the Experience section of the PDF.
-     Each entry now includes a desc paragraph (was missing before).
-
      TO ADD AN ENTRY: copy any object and fill in all 4 fields.
      TO REMOVE: delete the object.
      TO REORDER: move objects up or down in the array.
@@ -182,7 +176,6 @@ export class Resume {
   /* ════════════════════════════════════════
      CERTIFICATIONS (main content — clickable)
      ════════════════════════════════════════
-     Matches the Certificate section of the PDF exactly.
      Clicking any item opens the verification URL in a new tab.
 
      TO ADD: copy any object and fill in all 4 fields.
@@ -191,12 +184,12 @@ export class Resume {
   allCerts: Cert[] = [
     { name: 'Content Marketing',               issuer: 'HubSpot',     year: '2025', url: 'https://app-na2.hubspot.com/academy/achievements/zdl96ljd/en/1/clarence-lane-parungao/content-marketing'  },
     { name: 'Website UI/UX w/ ChatGPT',        issuer: 'Simplilearn', year: '2025', url: 'https://simpli-web.app.link/e/WAVm0Z3pp1b'                                                                 },
-    { name: 'Introduction to Figma',           issuer: 'Simplilearn', year: '2024', url: 'https://www.simplilearn.com/free-figma-course-with-certificate-course-skillup'  },
-    { name: 'Introduction to PHP',             issuer: 'Simplilearn', year: '2025', url: 'https://www.simplilearn.com/learn-design-thinking-basics-free-course-skillup'  },
+    { name: 'Introduction to Figma',           issuer: 'Simplilearn', year: '2024', url: 'https://www.simplilearn.com/free-figma-course-with-certificate-course-skillup'                             },
+    { name: 'Introduction to PHP',             issuer: 'Simplilearn', year: '2025', url: 'https://www.simplilearn.com/learn-php-basics-free-course-skillup'                                          },
     { name: 'Graphic Design & UI/UX Basics',   issuer: 'Simplilearn', year: '2025', url: 'https://simpli-web.app.link/e/xYJrSj2pp1b'                                                                 },
     { name: 'Design Thinking for Beginners',   issuer: 'Simplilearn', year: '2025', url: 'https://simpli-web.app.link/e/OQhzdD4vp1b'                                                                 },
     { name: 'SEO Certified',                   issuer: 'HubSpot',     year: '2025', url: 'https://app-na2.hubspot.com/academy/achievements/rt8k501v/en/1/clarence-lane-parungao/seo'                  },
-    { name: 'SEO II Certified',                issuer: 'HubSpot',     year: '2025', url: 'https://app-na2.hubspot.com/academy/achievements/c6h0qpry/en/1/clarence-lane-parungao/seo-ii'                  },
+    { name: 'SEO II Certified',                issuer: 'HubSpot',     year: '2026', url: 'https://app-na2.hubspot.com/academy/achievements/c6h0qpry/en/1/clarence-lane-parungao/seo-ii'              },
     { name: 'Digital Advertising',             issuer: 'HubSpot',     year: '2025', url: 'https://app-na2.hubspot.com/academy/achievements/kwrdztc7/en/1/clarence-lane-parungao/digital-advertising'  },
     { name: 'Digital Marketing',               issuer: 'HubSpot',     year: '2025', url: 'https://app-na2.hubspot.com/academy/achievements/b3j8m0hd/en/1/clarence-lane-parungao/digital-marketing'    },
     { name: 'JS Algorithms & Data Structures', issuer: 'fCC',         year: '2025', url: 'https://www.freecodecamp.org/certification/laney_cakes/javascript-algorithms-and-data-structures'           },

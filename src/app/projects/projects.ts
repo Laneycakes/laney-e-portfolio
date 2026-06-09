@@ -93,8 +93,8 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: "Laney's E-Portfolio",
       description:
-        'A responsive portfolio website developed with Angular to showcase my projects, technical skills, leadership experiences, certifications, and achievements. Designed with a custom visual identity focused on usability, accessibility, and responsive design.',  
-      tools: ['Angular', 'TypeScript', 'CSS', 'Responsive Design', 'SEO'],
+        'Designed and developed a responsive portfolio website to showcase my projects, skills, and achievements, with a focus on user-friendly navigation and modern web design.',
+      tools: ['Angular', 'TypeScript', 'CSS', 'Responsive Design'],
       category: 'Frontend',
       image: 'Logo.png',          /* ← swap with a screenshot of the portfolio */
       status: '2026',
@@ -103,8 +103,8 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: 'MJ Quality Cars',
       description:
-        'A local car dealership website built to promote second-hand vehicles in Mabalacat, Pampanga. Designed UI/UX wireframes, implemented SEO strategies, created blog content, and prepared project documentation.',
-      tools: ['UI/UX Design', 'SEO', 'Figma', 'Blog Content', 'Documentation'],
+        'Created UI/UX wireframes and contributed to website content and documentation, focusing on improving usability, visual appeal, and the overall user experience.',
+      tools: ['UI/UX Design', 'Figma', 'Blog Content', 'Documentation'],
       category: 'SEO',
       image: 'MJQualityCars.png',    /* ← screenshot of the MJ Quality Cars site */
       status: '2026',
@@ -113,8 +113,8 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: 'SplitSmart',
       description:
-        'A web-based bill-splitting application developed with a student team. Contributed to the back-end architecture using Node.js, Express.js, and MongoDB while assisting with user flow planning and interface design.',
-      tools: ['Node.js', 'Express.js', 'MongoDB', 'Figma', 'UI/UX'],
+        'Collaborated with a student team in designing a web-based bill-splitting application, contributing to interface planning, user experience design, and project documentation.',
+      tools: ['UI/UX Design', 'Figma', 'Wireframing', 'Documentation'],
       category: 'Full Stack',
       image: 'Splitsmart.png',       /* ← screenshot of SplitSmart */
       status: '2025',
@@ -123,7 +123,7 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: 'StudioSpot',
       description:
-        'Collaborated on a web-based studio rental management system, focusing on UI/UX design, wireframing, and project documentation to support booking and management workflows.',
+        'Contributed to the UI/UX design and documentation of a studio rental management system, focusing on intuitive user flows and a seamless booking experience.',
       tools: ['Figma', 'UI/UX Design', 'Wireframing', 'Documentation'],
       category: 'UI/UX',
       image: 'StudioSpot.jpg',       /* ← screenshot of StudioSpot */
@@ -133,7 +133,7 @@ export class Projects implements OnInit, OnDestroy {
     {
       title: 'PookieEater',
       description:
-        'Collaborated on a web-based studio rental management system, focusing on UI/UX design, wireframing, and project documentation to support booking and management workflows.', 
+        'Designed and developed a responsive website prototype for a homemade cookie business, showcasing products and customer reviews with a focus on accessibility and user engagement.',
       tools: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
       category: 'Frontend',
       image: 'PookieEater.png',      /* ← screenshot of PookieEater */

@@ -30,16 +30,16 @@ export class Home implements AfterViewInit {
     {
       title: 'MJ Quality Cars',
       image: 'MJQualityCars.png',
-      status: 'In Progress',
-      description: 'A local car dealership website designed to promote second-hand vehicles and connect buyers with quality options in Mabalacat, Pampanga.',
-      tools: ['UI/UX Design', 'SEO', 'Figma']
+      status: '2026',
+      description: 'Created UI/UX wireframes and contributed to website content and documentation, focusing on improving usability, visual appeal, and the overall user experience.',
+      tools: ['UI/UX Design', 'Figma', 'Blog Content', 'Documentation']
     },
     {
-      title: 'Split Smart',
+      title: 'SplitSmart',
       image: 'Splitsmart.png',
       status: '2025',
-      description: 'A smart expense-splitting app with full UI/UX design, wireframes, user flow, and project documentation.',
-      tools: ['Figma', 'UI/UX', 'Documentation']
+      description: 'Collaborated with a student team in designing a web-based bill-splitting application, contributing to interface planning, user experience design, and project documentation.',
+      tools: []
     }
   ];
 
